@@ -24,11 +24,7 @@ body {
     transition: 0.3s;
 }
 
-.node:hover{
-    background-color: white;
-    transform: scale(1.1);
-    
-}
+
 
 .wall {
     background-color: white !important;
