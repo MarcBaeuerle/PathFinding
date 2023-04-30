@@ -1,3 +1,43 @@
 body {
     background-color: black;
 }
+
+#grid{
+    height: 500px;
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+}
+
+.row {
+    width: 100%;
+    height: 10%;
+    display: flex;
+}
+
+.node {
+    background-color: rgb(48, 48, 48);
+    width: 10%;
+    height: 100%;
+    border: 1px solid gray;
+    display: block;
+    transition: 0.3s;
+}
+
+.node:hover{
+    background-color: white;
+    transform: scale(1.1);
+    
+}
+
+.wall {
+    background-color: white !important;
+}
+
+.start{
+    background-color: green !important;
+}
+
+.end{
+    background-color: red !important;
+}
