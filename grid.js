@@ -1,3 +1,5 @@
+import { createPath} from "./board.js";
+
 var debugMsg = 0;
 var allowDiag = 0;
 
@@ -52,7 +54,7 @@ export class Grid {
             for (let j = 0; j < this.grid[i].length; j++) {
                 output += this.grid[i][j].toString(0) + ``;
             }
-            console.log(output);
+
         }
 
 
@@ -224,7 +226,7 @@ export function aStar(grid, diag) {
         //path found
         if (curr == end) {
             if (debugMsg) console.log("Path has been found");
-            console.log(printPath(curr));
+            printPath(curr)
             return;
         }
 
@@ -294,6 +296,8 @@ function printPath(node) {
         path.push(curr.parent);
         curr = curr.parent;
     }
+
+    createPath(path);
     return path;
 }
 

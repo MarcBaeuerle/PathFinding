@@ -37,3 +37,7 @@ body {
 .end{
     background-color: red !important;
 }
+
+.path{
+    background-color: yellow;
+}
