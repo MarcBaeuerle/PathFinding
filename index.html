@@ -8,42 +8,34 @@
 </head>
 
 <body>
+    <section id="container">
+        <div id="grid">
 
-    <section id="grid">
-        
-        <!--cells will be drawn here-->
+            <!--cells will be drawn here-->
+        </div>
     </section>
+
 
     <button id="compute">Process</button>
     <button id="toggleWall">Delete Wall</button>
 
+    <div id="test">
+        <div id="inside">
+            <p>test</p>
+        </div>
+    </div>
+
+   
+
     <script type="module">
-        import {Grid, aStar} from "./grid.js";
-        import {createBoard} from "./board.js";
+        import { createBoard } from "./board.js";
 
-
-        //0 = walkable
-        //1 = wall
-        //2 = start
-        //3 = end
-        let graph = [
-            [2, 0, 0, 0, 0, 0],
-            [0, 1, 1, 0, 1, 1],
-            [0, 0, 1, 0, 1, 1],
-            [1, 0, 1, 0, 1, 3],
-            [1, 0, 0, 0, 0, 0],
-            
-        ]
-
-        createBoard(5,1);
-
-        //var test = new Grid(graph, 1);
-        //aStar(test);
+        createBoard();
 
 
 
 
-        
+
     </script>
 </body>
 
