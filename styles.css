@@ -2,26 +2,45 @@ body {
     background-color: black;
 }
 
-#grid{
-    height: 500px;
-    width: 500px;
+
+
+
+#container {
     display: flex;
-    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    
 }
 
+#grid{
+    margin: auto;
+    display: inline-block;
+}
+
+
 .row {
-    width: 100%;
-    height: 10%;
     display: flex;
 }
 
 .node {
     background-color: rgb(48, 48, 48);
-    width: 10%;
-    height: 100%;
-    border: 1px solid gray;
+    width: 19px;
+    height: 19px;
+
+
+    border-right: 1px solid gray;
+    border-bottom: 1px solid gray;
+
     display: block;
-    transition: 0.3s;
+    transition: 0.4s;
+}
+
+.row {
+    border-left: 1px solid gray;
+}
+
+#row1 {
+    border-top: 1px solid gray;
 }
 
 
@@ -40,4 +59,19 @@ body {
 
 .path{
     background-color: yellow;
+}
+
+.visited{
+    background-color: lightblue;
+}
+
+.test {
+    background-color: lightgreen;
+}
+
+p{
+    margin:0;
+    font-size: 5px;
+    color: black;
+    z-index: 1001;
 }

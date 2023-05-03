@@ -1,4 +1,5 @@
-import { Grid, aStar } from "./grid.js";
+import { Grid } from "./grid.js";
+import { aStar } from "./algorithms/aStar.js";
 
 let compute = document.getElementById(`compute`);
 let grid = document.querySelector(`#grid`);
@@ -15,6 +16,10 @@ var isToggling = false;
 var pathExists = false;
 var deleteWalls = false;
 var row;
+var rowCount;
+var rowSize;
+var initialWidth;
+
 
 compute.addEventListener(`click`, () => {
     computeArr();
@@ -29,9 +34,19 @@ compute.addEventListener(`click`, () => {
  * TODO: make the grid generation dynamic, but lets make sure a 10x10 works 
  * properly first.
  */
-export function createBoard(xx, yy) {
-    let x = 40;
-    let y = 80; 
+export function createBoard() {
+    let deviceWidth = window.innerWidth;
+    let deviceHeight = window.innerHeight;
+
+
+    let y = Math.round((deviceWidth-20)/20);
+    let x = Math.round(0.75*(deviceHeight/20));
+
+    rowCount = x;
+    rowSize = y;
+
+    initialWidth = deviceWidth;
+    grid.style.minWidth = y;
 
     grid.onmousedown = enableToggle;
     
@@ -45,6 +60,21 @@ export function createBoard(xx, yy) {
             node.className = `node`;
             node.id = `node${(i * y) + (j + 1)}`;
 
+            if (i === 3 && j === 3) {
+                node.classList.add(`start`);
+                startNode = true;
+            }
+
+            if (i === x-4 && j === y-4) {
+                node.classList.add(`end`);
+                endNode = true;
+            }
+
+            // if (i === 2 && j === 2) {
+            //     node.classList.add(`end`);
+            //     endNode = true;
+            // }
+
 
             node.onmouseenter = toggle; //drag clicking works
 
@@ -54,7 +84,7 @@ export function createBoard(xx, yy) {
         grid.appendChild(row);
     }
 
-    grid.onmouseup = disableToggle;
+    document.onmouseup = disableToggle;
     row = document.querySelector(`#row1`);
 }
 
@@ -72,6 +102,7 @@ function clicked(elementID) {
     let node = document.querySelector(`#${elementID}`);
     let cList = node.classList;
 
+    if (cList.contains('row')) return;
 
     //clicked on start node
     if (cList.contains(`start`)) {
@@ -154,14 +185,14 @@ function toggle(e) {
 
 
 /**
- * computes the array input for the designated path finding algorithm
+ * Converts the grid on the page into an array to be used for the 
+ * designated path finding algorithm
  */
 function computeArr() {
 
 
     let size = grid.childElementCount;
     let size2 = row.childElementCount;
-    console.log(size2);
     let matrix = new Array(size);
     let count = 1
 
@@ -188,9 +219,14 @@ function computeArr() {
     }
 
     var test = new Grid(matrix, 1);
-    aStar(test);
+    aStar(test, 0);
 }
 
+
+/**
+ * Creates a path from the end node to the start node
+ * @param {array} path array from end node to start node
+ */
 export function createPath(path) {
 
 
@@ -201,15 +237,16 @@ export function createPath(path) {
     
 
     if (pathExists) {
-        clearPath();
+        clearGrid();
     }
 
     async function load() {
-        for (let i = 1; i < path.length - 1; i++) {
+        for (let i = path.length - 1; i > 0; i--) {
             let x = path[i].x;
             let y = path[i].y;
 
             await timer(1500/path.length);
+            document.getElementById(`node${(y * rSize) + (x + 1)}`).classList.remove(`visited`);
             document.getElementById(`node${(y * rSize) + (x + 1)}`).classList.add(`path`);
         }
     }
@@ -217,16 +254,27 @@ export function createPath(path) {
     pathExists = true;
 }
 
-function clearPath(){
+
+/**
+ * Clears existing path on the grid
+ */
+export function clearGrid(){
     let rSize = row.childElementCount;
     for (let i = 0; i < grid.childElementCount; i++) {
         for (let j = 0; j < rSize; j++) {
-            document.getElementById(`node${(i * rSize) + (j + 1)}`).classList.remove(`path`);
+            document.getElementById(`node${(i * rSize) + (j + 1)}`).classList.remove(`path`,`visited`,`test`);
+            document.getElementById(`node${(i * rSize) + (j + 1)}`).innerHTML = ``;
+
+
         }
     }
     pathExists = false;
 }
 
+
+/**
+ * Button to add or delete walls from the grid.
+ */
 toggleWall.addEventListener('click', () => {
     deleteWalls = !deleteWalls;
     if (deleteWalls) {
@@ -235,3 +283,32 @@ toggleWall.addEventListener('click', () => {
         toggleWall.innerText = `Delete Walls`;
     }
 })
+
+export function displayNoPath() {
+    alert(`No path exists`);
+}
+
+
+/**
+ * makes 
+ */
+window.addEventListener(`resize`, ()=>{
+    let container = document.getElementById("container");
+    if (window.innerWidth >= initialWidth) {
+        container.style.display = "flex";
+    } else {
+        container.style.display = "inline-block";
+    }
+})
+
+export function explore(x, y) {
+    let node = document.getElementById(`node${(y * rowSize) + (x + 1)}`);
+    node.classList.remove(`test`);
+    node.classList.add(`visited`);
+}
+
+export function displayFCost(x,y,f,g,h) {
+    let node = document.getElementById(`node${(y * rowSize) + (x + 1)}`);
+    node.innerHTML = `<p>F:${f} &nbsp&nbsp&nbsp g:${g} &nbsp&nbsp&nbsp h:${h} </p>`;
+    node.classList.add(`test`);
+}
