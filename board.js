@@ -285,7 +285,18 @@ toggleWall.addEventListener('click', () => {
 })
 
 export function displayNoPath() {
-    alert(`No path exists`);
+    let popup = document.getElementById('popup');
+    popup.style.zIndex = '11';
+    popup.style.opacity = '1';
+    popup.style.transition = `opacity 0s`
+    setTimeout(()=> {
+        popup.style.transition = 'opacity 1.3s';
+        popup.style.opacity = '0';
+        setTimeout(()=>{
+            popup.style.zIndex = '0';
+        },1300);
+    },400);
+    
 }
 
 
