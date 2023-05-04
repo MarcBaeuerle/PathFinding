@@ -212,3 +212,11 @@ export function printPath(node) {
     return path;
 }
 
+/**
+ * just adds a delay for set amount of time
+ * @param {int} seconds in miliseconds
+ * @returns 
+ */
+export async function sleep(seconds) {
+    return new Promise((resolve) => setTimeout(resolve, seconds * 1000));
+}

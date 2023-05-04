@@ -1,5 +1,5 @@
-import { printPath } from "../grid.js";
-import { displayFCost, explore, clearGrid, displayNoPath} from "../board.js";
+import { printPath, sleep } from "../grid.js";
+import { displayFCost, explore, clearGrid, displayNoPath, displayOpened } from "../board.js";
 
 var debugMsg = 0;
 var allowDiag = 0;
@@ -39,7 +39,7 @@ export async function aStar(grid, diag) {
         //path found
         if (curr == end) {
             if (debugMsg) console.log("Path has been found");
-            printPath(curr)
+            printPath(curr);
             return;
         }
 
@@ -73,6 +73,7 @@ export async function aStar(grid, diag) {
                 }
                 
                 displayFCost(neighbour.x,neighbour.y,neighbour.f,neighbour.g,neighbour.h);
+                displayOpened(neighbour.x,neighbour.y);
             }
         }
 
@@ -100,15 +101,3 @@ function getLowestFCost(arr) {
     return node;
 }
 
-async function sleep(seconds) {
-    return new Promise((resolve) => setTimeout(resolve, seconds * 1000));
-}
-
-function distance(node1, node2) {
-    if (node1 && node2 && node2.x != node1.x && node2.y != node1.y) {
-        // return node1.weight * 1.41421;
-        return node1.weight+1;
-    }
-
-    return node1.weight;
-}

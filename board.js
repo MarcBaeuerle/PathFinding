@@ -1,9 +1,12 @@
 import { Grid } from "./grid.js";
 import { aStar } from "./algorithms/aStar.js";
+import { BFS } from "./algorithms/BFS.js";
 
 let compute = document.getElementById(`compute`);
 let grid = document.querySelector(`#grid`);
 let toggleWall = document.querySelector(`#toggleWall`);
+let astar = document.getElementById('astar');
+let bfs = document.getElementById('BFS');
 
 const WALL_COLOR = `rgb(255, 255, 255)`;
 const START_COLOR = `rgb(0, 128, 0)`;
@@ -22,7 +25,14 @@ var initialWidth;
 
 
 compute.addEventListener(`click`, () => {
-    computeArr();
+    if (astar.checked) {
+        computeArr('astar');
+    } else if (bfs.checked) {
+        computeArr('BFS');
+    } else {
+        alert('pick one bruh');
+        return;
+    }
 })
 
 /**
@@ -188,7 +198,7 @@ function toggle(e) {
  * Converts the grid on the page into an array to be used for the 
  * designated path finding algorithm
  */
-function computeArr() {
+function computeArr(string) {
 
 
     let size = grid.childElementCount;
@@ -219,7 +229,13 @@ function computeArr() {
     }
 
     var test = new Grid(matrix, 1);
-    aStar(test, 0);
+
+    if (string === 'astar') {
+        aStar(test, 0);
+    } else if (string === 'BFS') {
+        BFS(test);
+    }
+
 }
 
 
@@ -262,7 +278,7 @@ export function clearGrid(){
     let rSize = row.childElementCount;
     for (let i = 0; i < grid.childElementCount; i++) {
         for (let j = 0; j < rSize; j++) {
-            document.getElementById(`node${(i * rSize) + (j + 1)}`).classList.remove(`path`,`visited`,`test`);
+            document.getElementById(`node${(i * rSize) + (j + 1)}`).classList.remove(`path`,`visited`,`opened`);
             document.getElementById(`node${(i * rSize) + (j + 1)}`).innerHTML = ``;
 
 
@@ -284,6 +300,10 @@ toggleWall.addEventListener('click', () => {
     }
 })
 
+
+/**
+ * Displays a popup on screen when no path is found 
+ */
 export function displayNoPath() {
     let popup = document.getElementById('popup');
     popup.style.zIndex = '11';
@@ -301,7 +321,8 @@ export function displayNoPath() {
 
 
 /**
- * makes 
+ * makes the grid center when screen enlarged, and inline-block
+ * when screen shrinks
  */
 window.addEventListener(`resize`, ()=>{
     let container = document.getElementById("container");
@@ -312,14 +333,32 @@ window.addEventListener(`resize`, ()=>{
     }
 })
 
+/**
+ * Marks a node on the grid as 'visited' through color
+ * @param {int} x x coordinate
+ * @param {int} y y coordinate
+ */
 export function explore(x, y) {
     let node = document.getElementById(`node${(y * rowSize) + (x + 1)}`);
-    node.classList.remove(`test`);
+    node.classList.remove(`opened`);
     node.classList.add(`visited`);
 }
 
+/**
+ * displays the costs of a node in the grid. 
+ * Only called from A* algorithm.
+ * @param {*} x x coordinate
+ * @param {*} y y coordinate
+ * @param {*} f f cost of node
+ * @param {*} g g cost of node
+ * @param {*} h h cost of node
+ */
 export function displayFCost(x,y,f,g,h) {
     let node = document.getElementById(`node${(y * rowSize) + (x + 1)}`);
     node.innerHTML = `<p>F:${f} &nbsp&nbsp&nbsp g:${g} &nbsp&nbsp&nbsp h:${h} </p>`;
-    node.classList.add(`test`);
+}
+
+export function displayOpened(x,y) {
+    let node = document.getElementById(`node${(y * rowSize) + (x + 1)}`);
+    node.classList.add(`opened`);
 }

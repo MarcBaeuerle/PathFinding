@@ -13,15 +13,24 @@
             <p>No path exists</p>
         </section>
         <div id="grid">
-            
+
 
             <!--cells will be drawn here-->
         </div>
     </section>
-
-
+    <form>
+        <input type="checkbox" id="astar" name="astar">
+        <label for="astar">
+            A*
+        </label><br>
+        <input type="checkbox" id="BFS" name="BFS">
+        <label for="BFS">
+            BFS
+        </label><br>
+    </form>
 
     <button id="compute">Process</button>
+    <button id="computeBFS">BFS</button>
     <button id="toggleWall">Delete Wall</button>
 
     <div id="test">
@@ -30,7 +39,7 @@
         </div>
     </div>
 
-   
+
 
     <script type="module">
         import { createBoard } from "./board.js";
