@@ -1,5 +1,5 @@
 import { printPath } from "../grid.js";
-import { displayFCost, explore, clearGrid } from "../board.js";
+import { displayFCost, explore, clearGrid, displayNoPath} from "../board.js";
 
 var debugMsg = 0;
 var allowDiag = 0;
