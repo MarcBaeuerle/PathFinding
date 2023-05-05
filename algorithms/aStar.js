@@ -1,11 +1,13 @@
 import { printPath, sleep } from "../grid.js";
-import { displayFCost, explore, clearGrid, displayNoPath, displayOpened } from "../board.js";
+import { displayFCost, explore, clearGrid, displayNoPath, displayOpened, speed } from "../board.js";
 
 var debugMsg = 0;
 var allowDiag = 0;
 
+
 /**
- * Returns shortest route from Start node to End node in grid
+ * Returns shortest route from Start node to End node in grid 
+ * using the A* algorithm
  * @param {Grid} grid Grid class
  * @param {bool} diag Allow diagonal traversals
  * @returns Path from Start to End.
@@ -32,7 +34,7 @@ export async function aStar(grid, diag) {
         if (index > -1) open.splice(index, 1);
 
         curr.closed = true;
-        await sleep(0.01);
+        await sleep(speed);
         explore(curr.x,curr.y);
         
 

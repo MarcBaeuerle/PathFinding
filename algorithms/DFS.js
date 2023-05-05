@@ -5,34 +5,31 @@ var debugMsg = 0;
 
 
 /**
- * Returns shortest route from Start node to End node in grid
- * using the Breadth First search algorithm
+ * Returns a route from Start node to End node in grid
+ * using the Depth First search algorithm
  * @param {Grid} grid Grid class
  * @param {bool} diag Allow diagonal traversals
  * @returns Path from Start to End.
  */
-export async function BFS(grid) {
+export async function DFS(grid) {
     clearGrid();
-    if (debugMsg) console.log("----------Entering BSF function----------");
+    if (debugMsg) console.log("----------Entering DFS function----------");
 
+    let open = [];
     let start = grid.start;
     let end = grid.end;
     let curr;
-    let open = [];
 
     open.push(start);
 
     while (open.length > 0) {
         if (debugMsg) grid.toString();
 
-        //take node from front of open
-        curr = open.shift();
+        curr = open.pop();
         curr.closed = true;
 
         await sleep(speed);
         explore(curr.x, curr.y);
-
-        //path found 
 
         if (curr == end) {
             if (debugMsg) console.log("Path has been found");
@@ -42,8 +39,14 @@ export async function BFS(grid) {
 
         let neighbours = grid.getNeighbours(curr, 0);
 
-        for (let i = 0; i < neighbours.length; i++) {
-            let neighbour = neighbours[i];
+        let count = neighbours.length;
+
+        for (let i = 0; i < count; i++) {
+            let rand = (Math.random() * neighbours.length) | 0;
+            let neighbour = neighbours[rand];
+            neighbours.splice(rand,1);
+        
+
 
             if ((neighbour.isWall) || neighbour.closed || open.includes(neighbour)) {
                 continue;
@@ -51,14 +54,18 @@ export async function BFS(grid) {
 
             open.push(neighbour);
             neighbour.parent = curr;
-            displayOpened(neighbour.x,neighbour.y);
+            displayOpened(neighbour.x, neighbour.y);
+
 
         }
     }
-
     if (debugMsg) console.log("No path found");
     displayNoPath();
 
-
 }
+
+
+
+
+
 

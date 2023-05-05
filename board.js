@@ -1,12 +1,17 @@
 import { Grid } from "./grid.js";
 import { aStar } from "./algorithms/aStar.js";
 import { BFS } from "./algorithms/BFS.js";
+import { DFS } from "./algorithms/DFS.js";
+import { primMaze } from "./algorithms/mazeGeneration.js";
 
 let compute = document.getElementById(`compute`);
 let grid = document.querySelector(`#grid`);
 let toggleWall = document.querySelector(`#toggleWall`);
 let astar = document.getElementById('astar');
 let bfs = document.getElementById('BFS');
+let dfs = document.getElementById('DFS');
+let maze = document.getElementById('createMaze');
+let slider = document.getElementById('speed');
 
 const WALL_COLOR = `rgb(255, 255, 255)`;
 const START_COLOR = `rgb(0, 128, 0)`;
@@ -22,6 +27,7 @@ var row;
 var rowCount;
 var rowSize;
 var initialWidth;
+export var speed = 0.5;
 
 
 compute.addEventListener(`click`, () => {
@@ -29,6 +35,8 @@ compute.addEventListener(`click`, () => {
         computeArr('astar');
     } else if (bfs.checked) {
         computeArr('BFS');
+    } else if (dfs.checked) {
+        computeArr('DFS');
     } else {
         alert('pick one bruh');
         return;
@@ -49,8 +57,8 @@ export function createBoard() {
     let deviceHeight = window.innerHeight;
 
 
-    let y = Math.round((deviceWidth-20)/20);
-    let x = Math.round(0.75*(deviceHeight/20));
+    let y = Math.round((deviceWidth - 20) / 20);
+    let x = Math.round(0.75 * (deviceHeight / 20));
 
     rowCount = x;
     rowSize = y;
@@ -59,7 +67,7 @@ export function createBoard() {
     grid.style.minWidth = y;
 
     grid.onmousedown = enableToggle;
-    
+
     for (let i = 0; i < x; i++) {
         let row = document.createElement('div');
         row.className = `row`;
@@ -75,7 +83,7 @@ export function createBoard() {
                 startNode = true;
             }
 
-            if (i === x-4 && j === y-4) {
+            if (i === x - 4 && j === y - 4) {
                 node.classList.add(`end`);
                 endNode = true;
             }
@@ -199,8 +207,6 @@ function toggle(e) {
  * designated path finding algorithm
  */
 function computeArr(string) {
-
-
     let size = grid.childElementCount;
     let size2 = row.childElementCount;
     let matrix = new Array(size);
@@ -234,6 +240,8 @@ function computeArr(string) {
         aStar(test, 0);
     } else if (string === 'BFS') {
         BFS(test);
+    } else if (string === 'DFS') {
+        DFS(test);
     }
 
 }
@@ -248,9 +256,6 @@ export function createPath(path) {
 
     let size = grid.childElementCount;
     let rSize = row.childElementCount;
-    
-
-    
 
     if (pathExists) {
         clearGrid();
@@ -261,7 +266,7 @@ export function createPath(path) {
             let x = path[i].x;
             let y = path[i].y;
 
-            await timer(1500/path.length);
+            await timer(1500 / path.length);
             document.getElementById(`node${(y * rSize) + (x + 1)}`).classList.remove(`visited`);
             document.getElementById(`node${(y * rSize) + (x + 1)}`).classList.add(`path`);
         }
@@ -274,14 +279,12 @@ export function createPath(path) {
 /**
  * Clears existing path on the grid
  */
-export function clearGrid(){
+export function clearGrid() {
     let rSize = row.childElementCount;
     for (let i = 0; i < grid.childElementCount; i++) {
         for (let j = 0; j < rSize; j++) {
-            document.getElementById(`node${(i * rSize) + (j + 1)}`).classList.remove(`path`,`visited`,`opened`);
+            document.getElementById(`node${(i * rSize) + (j + 1)}`).classList.remove(`path`, `visited`, `opened`);
             document.getElementById(`node${(i * rSize) + (j + 1)}`).innerHTML = ``;
-
-
         }
     }
     pathExists = false;
@@ -307,16 +310,16 @@ toggleWall.addEventListener('click', () => {
 export function displayNoPath() {
     let popup = document.getElementById('popup');
     popup.style.zIndex = '11';
-    popup.style.opacity = '1';
+    popup.style.opacity = '0.95';
     popup.style.transition = `opacity 0s`
-    setTimeout(()=> {
-        popup.style.transition = 'opacity 1.3s';
+    setTimeout(() => {
+        popup.style.transition = 'opacity 1.7s';
         popup.style.opacity = '0';
-        setTimeout(()=>{
+        setTimeout(() => {
             popup.style.zIndex = '0';
-        },1300);
-    },400);
-    
+        }, 1700);
+    }, 400);
+
 }
 
 
@@ -324,7 +327,7 @@ export function displayNoPath() {
  * makes the grid center when screen enlarged, and inline-block
  * when screen shrinks
  */
-window.addEventListener(`resize`, ()=>{
+window.addEventListener(`resize`, () => {
     let container = document.getElementById("container");
     if (window.innerWidth >= initialWidth) {
         container.style.display = "flex";
@@ -341,24 +344,79 @@ window.addEventListener(`resize`, ()=>{
 export function explore(x, y) {
     let node = document.getElementById(`node${(y * rowSize) + (x + 1)}`);
     node.classList.remove(`opened`);
+    if (node.classList.contains('path')) {
+        return;
+    }
     node.classList.add(`visited`);
 }
 
 /**
  * displays the costs of a node in the grid. 
  * Only called from A* algorithm.
- * @param {*} x x coordinate
- * @param {*} y y coordinate
- * @param {*} f f cost of node
- * @param {*} g g cost of node
- * @param {*} h h cost of node
+ * @param {int} x x coordinate
+ * @param {int} y y coordinate
+ * @param {int} f f cost of node
+ * @param {int} g g cost of node
+ * @param {int} h h cost of node
  */
-export function displayFCost(x,y,f,g,h) {
+export function displayFCost(x, y, f, g, h) {
     let node = document.getElementById(`node${(y * rowSize) + (x + 1)}`);
     node.innerHTML = `<p>F:${f} &nbsp&nbsp&nbsp g:${g} &nbsp&nbsp&nbsp h:${h} </p>`;
 }
 
-export function displayOpened(x,y) {
+/**
+ * Sets a nodes color to green to represent it being opened in
+ * a particular algorithm
+ * @param {int} x 
+ * @param {int} y 
+ */
+export function displayOpened(x, y) {
     let node = document.getElementById(`node${(y * rowSize) + (x + 1)}`);
     node.classList.add(`opened`);
 }
+
+/**
+ * Sets a grid note to a wall
+ * @param {int} x 
+ * @param {int} y 
+ */
+export function makeWall(x, y) {
+    let node = document.getElementById(`node${(y * rowSize) + (x + 1)}`);
+    node.classList.add(`wall`);
+}
+
+
+/**
+ * Generates a maze on button click.
+ * NOT IMPLEMENTED
+ */
+maze.addEventListener('click', () => {
+
+    let matrix = new Array(rowCount);
+    let count = 1;
+
+    for (let i = 0; i < rowCount; i++) {
+        matrix[i] = new Array(rowSize);
+
+        for (let j = 0; j < rowSize; j++) {
+            let node = document.getElementById(`node${count}`);
+            let cList = node.classList;
+            let val = 1;
+            if (cList.contains(`start`)) {
+                val = 2;
+            } else if (cList.contains(`end`)) {
+                val = 3;
+            } 
+            matrix[i][j] = val;
+            count++;
+        }
+    }
+
+    var grid = new Grid(matrix, 0);
+
+    primMaze(grid);
+})
+
+slider.addEventListener('input', ()=> {
+    speed = 1 - slider.value;
+}, false);

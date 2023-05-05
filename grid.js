@@ -1,5 +1,5 @@
-import { displayNoPath, createPath} from "./board.js";
-import { aStar } from "./algorithms/aStar.js";
+import { createPath} from "./board.js";
+
 
 var debugMsg = 0;
 var allowDiag = 0;
@@ -47,7 +47,7 @@ export class Grid {
         }
 
 
-        console.log(this.start.toString(1));
+        if (debugMsg) console.log(this.start.toString(1));
     }
 
     //Prints Grid
