@@ -1,5 +1,5 @@
 import { printPath, sleep } from "../grid.js";
-import { explore, clearGrid, displayNoPath, displayOpened, speed } from "../board.js";
+import { explore, clearGrid, displayNoPath, displayOpened, speed, timeDiff } from "../board.js";
 
 var debugMsg = 0;
 
@@ -19,6 +19,8 @@ export async function BFS(grid) {
     let end = grid.end;
     let curr;
     let open = [];
+    let startTime = new Date();
+    let calls = 0;
 
     open.push(start);
 
@@ -36,7 +38,8 @@ export async function BFS(grid) {
 
         if (curr == end) {
             if (debugMsg) console.log("Path has been found");
-            printPath(curr);
+            let time = timeDiff(startTime);
+            printPath(curr, 'BFS', calls, time);
             return;
         }
 
@@ -50,6 +53,7 @@ export async function BFS(grid) {
             }
 
             open.push(neighbour);
+            calls++;
             neighbour.parent = curr;
             displayOpened(neighbour.x,neighbour.y);
 

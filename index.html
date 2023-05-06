@@ -18,23 +18,28 @@
             <!--cells will be drawn here-->
         </div>
     </section>
-    <form>
-        <input type="checkbox" id="astar" name="astar">
-        <label for="astar">
-            A*
-        </label><br>
-        <input type="checkbox" id="BFS" name="BFS">
-        <label for="BFS">
-            BFS
-        </label><br>
-        <input type="checkbox" id="DFS" name="DFS">
-        <label for="DFS">
-            DFS
-        </label><br>
-        <input type="range" id="speed" name="speed" min="0" max="0.99" step="any">
-        <label for="volume">speed</label>
-    </form>
+    <section id="controlPanel">
+        <form>
+            <input type="checkbox" id="astar" name="astar">
+            <label for="astar">
+                A*
+            </label><br>
+            <input type="checkbox" id="BFS" name="BFS">
+            <label for="BFS">
+                BFS
+            </label><br>
+            <input type="checkbox" id="DFS" name="DFS">
+            <label for="DFS">
+                DFS
+            </label><br>
+            <input type="range" id="speed" name="speed" min="0.5" max="0.99" step="any" value="0.9">
+            <label for="volume">speed</label>
+        </form>
+        <aside id="console">
 
+        </aside>
+    </section>
+    
     <button id="compute">Process</button>
     <button id="toggleWall">Delete Wall</button>
     <button id="createMaze">Create Maze</button>
@@ -44,8 +49,6 @@
             <p>test</p>
         </div>
     </div>
-
-
 
     <script type="module">
         import { createBoard } from "./board.js";

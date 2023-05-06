@@ -1,5 +1,5 @@
 import { printPath, sleep } from "../grid.js";
-import { displayFCost, explore, clearGrid, displayNoPath, displayOpened, speed } from "../board.js";
+import { displayFCost, explore, clearGrid, displayNoPath, displayOpened, speed, timeDiff } from "../board.js";
 
 var debugMsg = 0;
 var allowDiag = 0;
@@ -21,6 +21,8 @@ export async function aStar(grid, diag) {
     let end = grid.end;
     let curr;
     let open = [];
+    let startTime = new Date();
+    let calls = 0;
 
     open.push(start);
 
@@ -41,7 +43,8 @@ export async function aStar(grid, diag) {
         //path found
         if (curr == end) {
             if (debugMsg) console.log("Path has been found");
-            printPath(curr);
+            let time = timeDiff(startTime);
+            printPath(curr, 'A*&nbsp', calls, time);
             return;
         }
 
@@ -71,6 +74,7 @@ export async function aStar(grid, diag) {
 
                 if (!beenVisited) {
                     open.push(neighbour);
+                    calls++;
                     
                 }
                 

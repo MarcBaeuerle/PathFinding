@@ -12,6 +12,7 @@ let bfs = document.getElementById('BFS');
 let dfs = document.getElementById('DFS');
 let maze = document.getElementById('createMaze');
 let slider = document.getElementById('speed');
+let stats = document.getElementById('console');
 
 const WALL_COLOR = `rgb(255, 255, 255)`;
 const START_COLOR = `rgb(0, 128, 0)`;
@@ -27,7 +28,8 @@ var row;
 var rowCount;
 var rowSize;
 var initialWidth;
-export var speed = 0.5;
+var count = 1;
+export var speed = 0.1;
 
 
 compute.addEventListener(`click`, () => {
@@ -244,6 +246,8 @@ function computeArr(string) {
         DFS(test);
     }
 
+    
+
 }
 
 
@@ -420,3 +424,18 @@ maze.addEventListener('click', () => {
 slider.addEventListener('input', ()=> {
     speed = 1 - slider.value;
 }, false);
+
+export function addConsole(algorithm, calls, runtime, length) {
+    let string = `<p>[${count}] ${algorithm} visited ${calls} nodes in ${runtime}s. Path length: ${length}</p><br>`;
+    stats.innerHTML += string;
+    count++;
+    stats.scrollTop = stats.scrollHeight;
+}
+
+export function timeDiff(startTime) {
+    let endTime = new Date();
+    let timeDiff = endTime - startTime;
+    timeDiff /= 1000;
+    let seconds = Math.round(timeDiff * 1000) / 1000;
+    return seconds;
+}

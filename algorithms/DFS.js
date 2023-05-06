@@ -1,5 +1,5 @@
-import { printPath, sleep } from "../grid.js";
-import { explore, clearGrid, displayNoPath, displayOpened, speed } from "../board.js";
+import { printPath, sleep} from "../grid.js";
+import { explore, clearGrid, displayNoPath, displayOpened, speed, timeDiff} from "../board.js";
 
 var debugMsg = 0;
 
@@ -15,6 +15,8 @@ export async function DFS(grid) {
     clearGrid();
     if (debugMsg) console.log("----------Entering DFS function----------");
 
+    let startTime = new Date();
+    let calls = 0;
     let open = [];
     let start = grid.start;
     let end = grid.end;
@@ -33,7 +35,8 @@ export async function DFS(grid) {
 
         if (curr == end) {
             if (debugMsg) console.log("Path has been found");
-            printPath(curr);
+            let time = timeDiff(startTime);
+            printPath(curr, 'DFS', calls, time);
             return;
         }
 
@@ -53,6 +56,7 @@ export async function DFS(grid) {
             }
 
             open.push(neighbour);
+            calls++;
             neighbour.parent = curr;
             displayOpened(neighbour.x, neighbour.y);
 
@@ -63,8 +67,6 @@ export async function DFS(grid) {
     displayNoPath();
 
 }
-
-
 
 
 

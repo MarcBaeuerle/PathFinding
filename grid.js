@@ -1,4 +1,4 @@
-import { createPath} from "./board.js";
+import { createPath, addConsole} from "./board.js";
 
 
 var debugMsg = 0;
@@ -198,7 +198,7 @@ class GridNode {
  * @param {GridNode} node
  * @returns Path of nodes from end to start
  */
-export function printPath(node) {
+export function printPath(node, algorithm, calls, runtime) {
     let curr = node;
     let path = [];
     path.push(curr);
@@ -208,6 +208,7 @@ export function printPath(node) {
         curr = curr.parent;
     }
 
+    addConsole(algorithm, calls, runtime, path.length);
     createPath(path);
     return path;
 }
