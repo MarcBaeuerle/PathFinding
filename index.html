@@ -19,36 +19,22 @@
         </div>
     </section>
     <section id="controlPanel">
-        <form>
-            <input type="checkbox" id="astar" name="astar">
-            <label for="astar">
-                A*
-            </label><br>
-            <input type="checkbox" id="BFS" name="BFS">
-            <label for="BFS">
-                BFS
-            </label><br>
-            <input type="checkbox" id="DFS" name="DFS">
-            <label for="DFS">
-                DFS
-            </label><br>
-            <input type="range" id="speed" name="speed" min="0.5" max="0.99" step="any" value="0.9">
-            <label for="volume">speed</label>
-        </form>
-        <aside id="console">
-
-        </aside>
-    </section>
-    
-    <button id="compute">Process</button>
-    <button id="toggleWall">Delete Wall</button>
-    <button id="createMaze">Create Maze</button>
-
-    <div id="test">
-        <div id="inside">
-            <p>test</p>
+        <div id="algorithms">
+            <button id="astar" class="search">A* Search</button>
+            <button id="BFS" class="search">Breadth First Search</button>
+            <button id="DFS" class="search">Depth First Search</button>
         </div>
-    </div>
+        <div id="settings">
+            <input type="range" id="speed" name="speed" min="0.5" max="0.999" step="any" value="0.9">
+            <label for="volume">speed</label>
+            <button id="toggleWall">Delete Wall</button>
+            <button id="createMaze" disabled>Create Maze</button>
+        </div>
+    </section>
+    <aside id="console">
+
+    </aside>
+
 
     <script type="module">
         import { createBoard } from "./board.js";

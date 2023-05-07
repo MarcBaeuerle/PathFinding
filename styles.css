@@ -1,5 +1,7 @@
 body {
-    background-color: black;
+    background-color: #121212;
+    margin: 0;
+    padding: 0;
 }
 
 #container {
@@ -7,11 +9,11 @@ body {
     justify-content: center;
     align-items: flex-start;
     z-index: 10;
-    
+
 }
 
-#grid{
-    margin: auto;
+#grid {
+    margin: 0;
     display: inline-block;
 }
 
@@ -21,60 +23,65 @@ body {
 }
 
 .node {
-    background-color: rgb(48, 48, 48);
+    background-color: #121212;
     width: 19px;
     height: 19px;
     z-index: 10;
 
-    border-right: 1px solid gray;
-    border-bottom: 1px solid gray;
+    border-right: 1px solid rgb(54, 54, 54);
+    border-bottom: 1px solid rgb(54, 54, 54);
 
     display: block;
-    transition: 0.4s;
+    transition: 0.3s;
 
-    -webkit-user-select: none; /* Safari */
-    -ms-user-select: none; /* IE 10 and IE 11 */
-    user-select: none; /* Standard syntax */
+    -webkit-user-select: none;
+    /* Safari */
+    -ms-user-select: none;
+    /* IE 10 and IE 11 */
+    user-select: none;
+    /* Standard syntax */
 }
 
 .row {
-    border-left: 1px solid gray;
+    border-left: 1px solid rgb(54, 54, 54);
 }
 
 #row1 {
-    border-top: 1px solid gray;
+    border-top: 1px solid rgb(54, 54, 54);
 }
 
 
 
 .wall {
-    background-color: white !important;
+    background-color: rgb(197, 235, 239) !important;
 }
 
-.start{
-    background-color: green !important;
+.start {
+    background-color: rgb(0, 255, 0) !important;
 }
 
-.end{
-    background-color: red !important;
+.end {
+    background-color: rgb(255, 0, 0) !important;
 }
 
-.path{
-    background-color: yellow;
+.path {
+    background-color: rgb(255, 249, 81);
 }
 
-.visited{
-    background-color: lightblue;
+.visited {
+    background-color: #396bcf;
 }
 
 .opened {
-    background-color: lightgreen;
+    background-color: rgb(66, 158, 66);
 }
 
-p{
-    margin:0;
+p {
+    text-align: left;
+    padding-left: 3px;
+    margin: 0;
     font-size: 5px;
-    color: black;
+    color: rgb(0, 0, 0);
     z-index: 1001;
 }
 
@@ -99,22 +106,43 @@ p{
 
 #popup p {
     font-size: 40px;
-    font-family:Arial, Helvetica, sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 
 /* -----------------Control Panel----------------- */
 
-form {
-    background-color: white;
-    width: 60%;
+#controlPanel{
+    margin-top: 10px;
+    background-color: #121212;
+    flex-direction: row;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content:space-between;
+    color: white;
+    padding: 0 20px;
 }
 
-#console{
-    background-color: black;
-    border: 1px solid white;
-    width: 40%;
+button {
+    margin: 10px;
+    background-color: lightblue;
+    padding: 10px;
+    margin: 0px 5px;
+    border: none;
+    height: 50px;
+}
+
+#algorithms{
+    display: flex;
+}
+
+
+
+/*--------------Console--------------*/
+#console {
+    width: 100%;
     overflow: auto;
+
 }
 
 #console p {
@@ -122,10 +150,4 @@ form {
     font-size: 0.8rem;
     display: inline;
     font-family: monospace;
-}
-
-#controlPanel{
-    display:flex;
-    width: 100%;
-    height: 100px;
 }

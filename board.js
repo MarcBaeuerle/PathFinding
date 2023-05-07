@@ -4,15 +4,12 @@ import { BFS } from "./algorithms/BFS.js";
 import { DFS } from "./algorithms/DFS.js";
 import { primMaze } from "./algorithms/mazeGeneration.js";
 
-let compute = document.getElementById(`compute`);
 let grid = document.querySelector(`#grid`);
 let toggleWall = document.querySelector(`#toggleWall`);
-let astar = document.getElementById('astar');
-let bfs = document.getElementById('BFS');
-let dfs = document.getElementById('DFS');
 let maze = document.getElementById('createMaze');
 let slider = document.getElementById('speed');
 let stats = document.getElementById('console');
+let search = document.getElementsByClassName('search');
 
 const WALL_COLOR = `rgb(255, 255, 255)`;
 const START_COLOR = `rgb(0, 128, 0)`;
@@ -29,21 +26,20 @@ var rowCount;
 var rowSize;
 var initialWidth;
 var count = 1;
+var disableSearch = false;
 export var speed = 0.1;
 
+/**
+ * Event Listener for each search algorithm to start search
+ */
+for (let i = 0; i < search.length; i++) {
+    search[i].addEventListener('click', () => {
+        computeArr(search[i].id);
+        toggleButtons();
+    });
+}
 
-compute.addEventListener(`click`, () => {
-    if (astar.checked) {
-        computeArr('astar');
-    } else if (bfs.checked) {
-        computeArr('BFS');
-    } else if (dfs.checked) {
-        computeArr('DFS');
-    } else {
-        alert('pick one bruh');
-        return;
-    }
-})
+
 
 /**
  * Creates and appends cells to page.
@@ -176,9 +172,10 @@ function make(elementID, state) {
 function enableToggle(e) {
     isToggling = true;
 
-    if (e.target !== grid) {
-        toggle(e);
-    }
+    // if (e.target !== grid) {
+    //     toggle(e);
+    // }
+    toggle(e);
 }
 
 /**
@@ -199,8 +196,7 @@ function toggle(e) {
     if (isToggling === false) {
         return;
     }
-
-    clicked(e.target.id)
+    clicked(e.target.id);
 }
 
 
@@ -208,7 +204,7 @@ function toggle(e) {
  * Converts the grid on the page into an array to be used for the 
  * designated path finding algorithm
  */
-function computeArr(string) {
+export function computeArr(string) {
     let size = grid.childElementCount;
     let size2 = row.childElementCount;
     let matrix = new Array(size);
@@ -246,7 +242,7 @@ function computeArr(string) {
         DFS(test);
     }
 
-    
+
 
 }
 
@@ -257,8 +253,6 @@ function computeArr(string) {
  */
 export function createPath(path) {
 
-
-    let size = grid.childElementCount;
     let rSize = row.childElementCount;
 
     if (pathExists) {
@@ -277,6 +271,7 @@ export function createPath(path) {
     }
     load();
     pathExists = true;
+    toggleButtons();
 }
 
 
@@ -365,7 +360,7 @@ export function explore(x, y) {
  */
 export function displayFCost(x, y, f, g, h) {
     let node = document.getElementById(`node${(y * rowSize) + (x + 1)}`);
-    node.innerHTML = `<p>F:${f} &nbsp&nbsp&nbsp g:${g} &nbsp&nbsp&nbsp h:${h} </p>`;
+    node.innerHTML = `<p>F:${f}</p><p>G:${g}</p><p>H:${h}</p>`;
 }
 
 /**
@@ -410,7 +405,7 @@ maze.addEventListener('click', () => {
                 val = 2;
             } else if (cList.contains(`end`)) {
                 val = 3;
-            } 
+            }
             matrix[i][j] = val;
             count++;
         }
@@ -421,10 +416,22 @@ maze.addEventListener('click', () => {
     primMaze(grid);
 })
 
-slider.addEventListener('input', ()=> {
-    speed = 1 - slider.value;
+
+/**
+ * Changes the speed of grid animation when moving the slider
+ */
+slider.addEventListener('input', () => {
+    speed = 0.934 - Math.pow((slider.value-0.5), 1/10);
 }, false);
 
+
+/**
+ * Adds data to the console with each SUCCESSFUL algorithm call
+ * @param {string} algorithm algorithm name
+ * @param {int} calls number of calls the algorithm made
+ * @param {int} runtime runtime of the algorithm in seconds
+ * @param {int} length length of the path between start and finish
+ */
 export function addConsole(algorithm, calls, runtime, length) {
     let string = `<p>[${count}] ${algorithm} visited ${calls} nodes in ${runtime}s. Path length: ${length}</p><br>`;
     stats.innerHTML += string;
@@ -432,10 +439,30 @@ export function addConsole(algorithm, calls, runtime, length) {
     stats.scrollTop = stats.scrollHeight;
 }
 
+
+/**
+ * Calculates the time difference betwwen startTime and the moment this function is called
+ * @param {int} startTime 
+ * @returns time in seconds
+ */
 export function timeDiff(startTime) {
     let endTime = new Date();
     let timeDiff = endTime - startTime;
     timeDiff /= 1000;
     let seconds = Math.round(timeDiff * 1000) / 1000;
     return seconds;
+}
+
+/**
+ * Disables algorithm buttons when search animation is in process to avoid buggy display
+ */
+export function toggleButtons() {
+    disableSearch = !disableSearch;
+    for (let i = 0; i < search.length; i++) {
+        if (disableSearch) {
+            search[i].disabled = true;
+        } else {
+            search[i].disabled = false;
+        }
+    }
 }

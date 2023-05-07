@@ -1,5 +1,5 @@
 import { printPath, sleep } from "../grid.js";
-import { displayFCost, explore, clearGrid, displayNoPath, displayOpened, speed, timeDiff } from "../board.js";
+import { displayFCost, explore, clearGrid, displayNoPath, displayOpened, speed, timeDiff, toggleButtons } from "../board.js";
 
 var debugMsg = 0;
 var allowDiag = 0;
@@ -87,6 +87,7 @@ export async function aStar(grid, diag) {
     }
     if (debugMsg) console.log("No path found");
     displayNoPath();
+    toggleButtons();
 }
 
 /**

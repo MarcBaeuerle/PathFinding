@@ -1,5 +1,5 @@
 import { printPath, sleep} from "../grid.js";
-import { explore, clearGrid, displayNoPath, displayOpened, speed, timeDiff} from "../board.js";
+import { explore, clearGrid, displayNoPath, displayOpened, speed, timeDiff, toggleButtons} from "../board.js";
 
 var debugMsg = 0;
 
@@ -65,6 +65,7 @@ export async function DFS(grid) {
     }
     if (debugMsg) console.log("No path found");
     displayNoPath();
+    toggleButtons();
 
 }
 
