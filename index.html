@@ -23,6 +23,7 @@
             <button id="astar" class="search">A* Search</button>
             <button id="BFS" class="search">Breadth First Search</button>
             <button id="DFS" class="search">Depth First Search</button>
+            <button id="RS" class="search">Random Search</button>
         </div>
         <div id="settings">
             <input type="range" id="speed" name="speed" min="0.5" max="0.999" step="any" value="0.9">
@@ -34,6 +35,77 @@
     <aside id="console">
 
     </aside>
+
+
+
+    <section class="content">
+        <h1>Path Finding algorithms</h1>
+        <br>
+        <br>
+        <br>
+        <ul>
+            <li>
+                <div class="GIF">
+                    <img src="a*animation.gif">
+                </div>
+                <h2>A* Search</h2>
+                <div class="text">
+                    <h2>A* Search</h2>
+                    <p>A* is an informed search algorithm that finds the shortest path between two points in a graph or
+                        grid. It uses a heuristic function to evaluate nodes by combining the cost of reaching the node
+                        (G
+                        cost), with an estimate of the cost required to reach to end point (H cost) to give us the F
+                        cost.
+                        A* explores the most promising nodes first and guarantees optimal pathfinding.</p>
+                </div>
+            </li>
+            <li class="leftLi">
+                <div class="GIF">
+                    <img src="a*animation.gif">
+                </div>
+                <div class="text">
+                    <h2>Breadth First Search</h2>
+                    <p>Like A*, BFS guarantees the shortest path between two points by exploring all the nodes at the
+                        current depth from the start point before moving on to the nodes at the next depth. BFS uses a queue
+                        to keep track of nodes to be explored, which ensures that nodes are visited in the order they are
+                        discovered. </p>
+                </div>
+            </li>
+            <li>
+                <div class="GIF">
+                    <img src="a*animation.gif">
+                </div>
+                <div class="text">
+                    <h2>Depth First Search</h2>
+                    <p>Unlike the previous two algorithms, DFS only guarantees a path between two points if it exists by
+                        exploring as far as possible along along each path before backtracking. DFS uses a stack to keep
+                        track of nodes to be explored which means it visits nodes in the order they were added to the stack.
+                        Typically DFS explores unvisited nodes in the same order, but I added a randomizer to make the path
+                        look more interesting.</p>
+                </div>
+            </li>
+            <li class="leftLi">
+                <div class="GIF">
+                    <img src="a*animation.gif">
+                </div>
+                <div class="text">
+                    <h2>"Random Search"</h2>
+                    <p>This algorithm is very similar to DFS, in which it guarantees a path between two points by using a stack to explore nodes. However, instead of the adding each node visited to the stack in the same order, it randomizes the order that the nodes are inserted. This produces a unique and chaotic exploration with each search.</p>
+                </div>
+            </li>
+
+        </ul>
+    </section>
+
+
+    </section>
+    <h1>Maze generation Algorithms</h1>
+
+
+
+    <footer>
+        <p>Made by Marc Baeuerle</p>
+    </footer>
 
 
     <script type="module">

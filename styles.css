@@ -2,6 +2,7 @@ body {
     background-color: #121212;
     margin: 0;
     padding: 0;
+    text-align: center
 }
 
 #container {
@@ -76,7 +77,7 @@ body {
     background-color: rgb(66, 158, 66);
 }
 
-p {
+.node p {
     text-align: left;
     padding-left: 3px;
     margin: 0;
@@ -95,13 +96,14 @@ p {
     height: 80px;
     padding: 20px;
     z-index: 1;
-    vertical-align: middle;
-    text-align: center;
     line-height: 80px;
     transition: 2s;
-
+    display: flex;
     background-color: rgb(237, 95, 95);
     border: 2px solid rgb(0, 0, 0);
+
+    align-items: center;
+    justify-content: center;
 }
 
 #popup p {
@@ -116,7 +118,7 @@ p {
     margin-top: 10px;
     background-color: #121212;
     flex-direction: row;
-    display: flex;
+    display: inline;
     flex-wrap: wrap;
     justify-content:space-between;
     color: white;
@@ -130,6 +132,11 @@ button {
     margin: 0px 5px;
     border: none;
     height: 50px;
+    transition: 0.3s;
+}
+
+button:hover {
+    background-color: rgb(116, 145, 154);
 }
 
 #algorithms{
@@ -150,4 +157,107 @@ button {
     font-size: 0.8rem;
     display: inline;
     font-family: monospace;
+}
+
+/*-–------Content-----------*/
+
+h1 {
+    color: white;
+    font-family: 'Ubuntu', sans-serif;
+    width: 80%;
+    margin: auto
+}
+
+
+.content {
+    /* background: blue; */
+}
+
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    width: 1000px;
+    margin: auto;
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-bottom: 100px;
+}
+
+.GIF {
+    /* background-color: pink; */
+    height: 330px;
+    width: 56%;
+    display: flex;
+    align-items: center;
+}
+
+.GIF img {
+    width: 100%;
+}
+
+
+.text {
+    background-color: #272729;
+    /* background-color: lightblue; */
+    width: 50%;
+    position: absolute;
+    z-index: 2;
+    display: inline-block;
+    right: 0;
+    text-align: right;
+    border-radius: 7px;
+    padding: 0 20px;
+    border: 1px solid #3e3e42;
+    /* background-color: #121212; */
+}
+
+.leftLi .text {
+    left:0;
+    text-align: left;
+}
+
+
+
+.leftLi .GIF {
+    margin-left: auto;
+}
+
+.text h2 {
+    position: absolute;
+    right: 0;
+    top: -30%;
+    font-family: 'Ubuntu', sans-serif;
+    font-weight:bolder;
+    /* color: rgb(119, 119, 237); */
+    color: rgb(255, 249, 81);
+}
+
+.leftLi h2 {
+    left:0;
+    top: -40%;
+}
+
+.text p {
+    font-family: 'Raleway', sans-serif;
+    line-height: 1.5em;
+    font-weight: 500;
+    color: rgb(149, 195, 210);
+
+}
+
+
+
+@media screen and (max-width: 1250px) {
+    li {
+        width: 80%;
+    }
+
+    h1 {
+        background-color: blue;
+    }
 }

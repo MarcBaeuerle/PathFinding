@@ -45,13 +45,13 @@ export async function DFS(grid) {
         let count = neighbours.length;
 
         for (let i = 0; i < count; i++) {
-            let rand = (Math.random() * neighbours.length) | 0;
-            let neighbour = neighbours[rand];
-            neighbours.splice(rand,1);
+            //let rand = (Math.random() * neighbours.length) | 0;
+            let neighbour = neighbours[i];
+            //neighbours.splice(rand,1);
         
 
 
-            if ((neighbour.isWall) || neighbour.closed || open.includes(neighbour)) {
+            if ((neighbour.isWall) || neighbour.closed) {
                 continue;
             }
 

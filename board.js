@@ -2,6 +2,7 @@ import { Grid } from "./grid.js";
 import { aStar } from "./algorithms/aStar.js";
 import { BFS } from "./algorithms/BFS.js";
 import { DFS } from "./algorithms/DFS.js";
+import { RS } from "./algorithms/RS.js";
 import { primMaze } from "./algorithms/mazeGeneration.js";
 
 let grid = document.querySelector(`#grid`);
@@ -240,6 +241,8 @@ export function computeArr(string) {
         BFS(test);
     } else if (string === 'DFS') {
         DFS(test);
+    } else if (string == 'RS') {
+        RS(test);
     }
 
 
@@ -263,10 +266,12 @@ export function createPath(path) {
         for (let i = path.length - 1; i > 0; i--) {
             let x = path[i].x;
             let y = path[i].y;
+            let node = document.getElementById(`node${(y * rSize) + (x + 1)}`)
 
             await timer(1500 / path.length);
-            document.getElementById(`node${(y * rSize) + (x + 1)}`).classList.remove(`visited`);
-            document.getElementById(`node${(y * rSize) + (x + 1)}`).classList.add(`path`);
+            
+            node.classList.remove(`visited`);
+            node.classList.add(`path`);
         }
     }
     load();
@@ -342,10 +347,11 @@ window.addEventListener(`resize`, () => {
  */
 export function explore(x, y) {
     let node = document.getElementById(`node${(y * rowSize) + (x + 1)}`);
-    node.classList.remove(`opened`);
-    if (node.classList.contains('path')) {
-        return;
-    }
+    node.classList.remove(`opened`, `path`);
+    // if (node.classList.contains('path')) {
+    //     return;
+    // }
+
     node.classList.add(`visited`);
 }
 
