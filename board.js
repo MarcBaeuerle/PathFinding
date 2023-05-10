@@ -10,6 +10,7 @@ let toggleWall = document.querySelector(`#toggleWall`);
 let maze = document.getElementById('createMaze');
 let slider = document.getElementById('speed');
 let stats = document.getElementById('console');
+let clear = document.getElementById('clear');
 let search = document.getElementsByClassName('search');
 
 const WALL_COLOR = `rgb(255, 255, 255)`;
@@ -39,6 +40,8 @@ for (let i = 0; i < search.length; i++) {
         toggleButtons();
     });
 }
+
+
 
 
 
@@ -472,3 +475,7 @@ export function toggleButtons() {
         }
     }
 }
+
+clear.addEventListener('click', () => {
+    clearGrid();
+})

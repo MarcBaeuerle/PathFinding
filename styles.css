@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300;400&family=Source+Code+Pro:wght@500&family=Ubuntu:wght@300;500&display=swap');
+
 body {
     background-color: #121212;
     margin: 0;
@@ -16,6 +18,7 @@ body {
 #grid {
     margin: 0;
     display: inline-block;
+    overflow: hidden;
 }
 
 
@@ -162,15 +165,9 @@ button:hover {
 /*-–------Content-----------*/
 
 h1 {
-    color: white;
+    margin: 30px 0;
     font-family: 'Ubuntu', sans-serif;
-    width: 80%;
-    margin: auto
-}
-
-
-.content {
-    /* background: blue; */
+    color: white;
 }
 
 
@@ -188,58 +185,53 @@ li {
     margin-bottom: 100px;
 }
 
+.leftLi {
+    flex-direction: row-reverse;
+}
+
 .GIF {
-    /* background-color: pink; */
-    height: 330px;
-    width: 56%;
+    margin: 0;
+    padding: 0;
+    background-color: pink;
+    width: 55%;
     display: flex;
     align-items: center;
 }
 
 .GIF img {
     width: 100%;
+    border: 1px rgb(63, 63, 63) solid;
+}
+
+
+
+.container {
+    /* background-color: lightcoral; */
+    width: 55%;
+    position: absolute;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.leftLi .container {
+    left:0;
 }
 
 
 .text {
     background-color: #272729;
-    /* background-color: lightblue; */
-    width: 50%;
-    position: absolute;
     z-index: 2;
-    display: inline-block;
-    right: 0;
     text-align: right;
     border-radius: 7px;
-    padding: 0 20px;
     border: 1px solid #3e3e42;
+    padding: 0 15px;
+    position: relative;
     /* background-color: #121212; */
 }
 
 .leftLi .text {
-    left:0;
     text-align: left;
-}
-
-
-
-.leftLi .GIF {
-    margin-left: auto;
-}
-
-.text h2 {
-    position: absolute;
-    right: 0;
-    top: -30%;
-    font-family: 'Ubuntu', sans-serif;
-    font-weight:bolder;
-    /* color: rgb(119, 119, 237); */
-    color: rgb(255, 249, 81);
-}
-
-.leftLi h2 {
-    left:0;
-    top: -40%;
 }
 
 .text p {
@@ -251,13 +243,149 @@ li {
 }
 
 
+.container h2 {
+    align-self: flex-end;
+    padding: 0;
+    margin: 15px;
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: bolder;
+    /* color: rgb(119, 119, 237); */
+    color: rgb(255, 249, 81);
+
+}
+
+.leftLi h2 {
+    align-self: flex-start;
+}
+
+
+.links {
+    align-self: flex-end;
+    display: flex;
+    flex-direction: row;
+    padding-top: 15px;
+    padding-right: 10px;
+    padding-left: 10px;
+    gap: 15px;
+}
+
+.leftLi .links {
+    align-self: flex-start;
+}
+
+a .blueFilter {
+    filter: invert(96%) sepia(4%) saturate(6238%) hue-rotate(160deg) brightness(107%) contrast(65%);
+    height: 30px;
+    transition: 0.3s ease;
+    
+}
+
+a img:hover{
+    transform: scale(1.2);
+}
+
+
 
 @media screen and (max-width: 1250px) {
+
     li {
         width: 80%;
     }
 
-    h1 {
-        background-color: blue;
+    .container {
+        width: 55%;
+    }
+
+    .GIF {
+        width: 60%;
     }
 }
+
+@media screen and (max-width: 922px) {
+
+    .GIF {
+        width: 60%;
+        top: 5px;
+    }
+
+
+}
+
+@media screen and (max-width: 768px) {
+    li {
+        display:flex;
+        flex-direction: column-reverse;
+
+    }
+
+    .GIF {
+        width: 100%;
+        margin: auto;
+        position: static;
+        opacity: 100%;;
+
+    }
+
+    .container {
+        background-color: #272729;
+        border-radius: 7px;
+        border: 1px solid #3e3e42;
+        position: sticky;
+        top: 0;
+        width: 100%;
+        padding: 30px 0;
+    }
+
+    .container h2 {
+        align-self: flex-start;
+        margin-left: 50px;
+
+    }
+
+    .text {
+        background-color: transparent;
+        border: 0px;
+        text-align: left;
+        margin: 0;
+        padding: 0 50px;
+    }
+
+    .links {
+        align-self: flex-start;
+        margin-left: 50px;
+    }
+
+    .leftLi {
+        display: flex;
+        flex-direction: column-reverse;
+    }
+
+}
+
+footer {
+    background-color:#272729;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: 300;
+}
+
+footer img {
+    height: 30px;
+    filter: brightness(0) invert(1);
+}
+
+
+footer a:visited {
+    color: white;
+}
+
+footer p {
+    padding: 0;
+    margin: 10px;;
+}
+

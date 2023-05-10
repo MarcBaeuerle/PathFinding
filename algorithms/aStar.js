@@ -37,8 +37,8 @@ export async function aStar(grid, diag) {
 
         curr.closed = true;
         await sleep(speed);
-        explore(curr.x,curr.y);
-        
+        explore(curr.x, curr.y);
+
 
         //path found
         if (curr == end) {
@@ -63,23 +63,25 @@ export async function aStar(grid, diag) {
             let beenVisited = neighbour.visited;
 
             if (!beenVisited || gScore < neighbour.g) {
-                
+
                 //Found an optimal (so far) path to this node. Take score for node to see how good it is
                 neighbour.visited = true;
                 neighbour.parent = curr;
                 neighbour.h = grid.getHCost(neighbour);
-                
+
                 neighbour.g = gScore;
                 neighbour.f = neighbour.g + neighbour.h;
 
                 if (!beenVisited) {
                     open.push(neighbour);
                     calls++;
-                    
+
                 }
-                
-                displayFCost(neighbour.x,neighbour.y,neighbour.f,neighbour.g,neighbour.h);
-                displayOpened(neighbour.x,neighbour.y);
+
+                if (neighbour != end) {
+                    displayFCost(neighbour.x, neighbour.y, neighbour.f, neighbour.g, neighbour.h);
+                    displayOpened(neighbour.x, neighbour.y);
+                }
             }
         }
 
@@ -98,10 +100,10 @@ export async function aStar(grid, diag) {
 function getLowestFCost(arr) {
     let node = arr[0];
     for (let i = 0; i < arr.length; i++) {
-        if ((arr[i].f < node.f) 
+        if ((arr[i].f < node.f)
             || (arr[i].f === node.f) && (arr[i].h < node.h)) {
             node = arr[i];
-        } 
+        }
     }
 
     if (debugMsg) console.log(`Lowest F Cost: ${node.toString(1)}`);
