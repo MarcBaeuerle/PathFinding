@@ -1,10 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300;400&family=Source+Code+Pro:wght@500&family=Ubuntu:wght@300;500&display=swap');
+* {
+    padding: 0;
+    margin: 0;
+}
 
 body {
     background-color: #121212;
     margin: 0;
     padding: 0;
-    text-align: center
+    text-align: center;
 }
 
 #container {
@@ -117,41 +121,119 @@ body {
 
 /* -----------------Control Panel----------------- */
 
-#controlPanel{
-    margin-top: 10px;
-    background-color: #121212;
-    flex-direction: row;
-    display: inline;
+.controlPanel {
+    margin: 0;
+    padding: 0;
+    background-color: red;
+    display: flex;
+    justify-content:left;
+    padding: 10px;
+    gap: 10px;
     flex-wrap: wrap;
-    justify-content:space-between;
-    color: white;
-    padding: 0 20px;
+    width: fit-content;
 }
 
 button {
-    margin: 10px;
-    background-color: lightblue;
-    padding: 10px;
-    margin: 0px 5px;
-    border: none;
+    width: 150px;
     height: 50px;
-    transition: 0.3s;
+    border-radius: 10px;
+    border: none;
 }
 
-button:hover {
-    background-color: rgb(116, 145, 154);
+.button1 {
+    width: 100px;
 }
 
-#algorithms{
+.dropdown {
+    position: relative;
+}
+
+.dropdown-content {
+    display: none;
+    text-align: left;
+    position: absolute;
+    bottom: 100%;
+    width: 100%;
+    z-index: 11;
+}
+
+.dropdown-content a {
+    transition: 0.2s ease;
+    background-color: white;
+    color: black;
+    padding: 10px 0 10px 10px;
+}
+
+.dropdown-content a:hover {
+    background-color: lightblue;
+
+}
+
+.dropdown:hover .dropdown-content {
     display: flex;
+    flex-direction: column;
 }
 
+input[type="range"] {
+    margin-top: 2px;
+    -webkit-appearance: none;
+    appearance: none;
+    background-color: transparent;
+    cursor: pointer;
+    z-index: 1000;
+}
+
+
+.slider {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    margin-top: 5px;
+}
+
+/***** Track Styles *****/
+/***** Chrome, Safari, Opera, and Edge Chromium *****/
+input[type="range"]::-webkit-slider-runnable-track {
+    background: #053a5f;
+    height: 6px;
+    border-radius: 5px;
+}
+
+/******** Firefox ********/
+input[type="range"]::-moz-range-track {
+    background: #053a5f;
+    height: 0.5rem;
+}
+/***** Thumb Styles *****/
+/***** Chrome, Safari, Opera, and Edge Chromium *****/
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none; /* Override default look */
+    appearance: none;
+    margin-top: -7px; /* Centers thumb on the track */
+    background-color: #5cd5eb;
+    height: 20px;
+    width: 8px;    
+    border-radius: 10px;
+ }
+
+ .radiusBottom {
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+ }
+
+ .radiusTop {
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+
+ }
 
 
 /*--------------Console--------------*/
 #console {
-    width: 100%;
-    overflow: auto;
+    width: 100pxpx;
+    height: 50px;
+    background-color: blue;
 
 }
 
@@ -215,7 +297,7 @@ li {
 }
 
 .leftLi .container {
-    left:0;
+    left: 0;
 }
 
 
@@ -277,10 +359,10 @@ a .blueFilter {
     filter: invert(96%) sepia(4%) saturate(6238%) hue-rotate(160deg) brightness(107%) contrast(65%);
     height: 30px;
     transition: 0.3s ease;
-    
+
 }
 
-a img:hover{
+a img:hover {
     transform: scale(1.2);
 }
 
@@ -313,7 +395,7 @@ a img:hover{
 
 @media screen and (max-width: 768px) {
     li {
-        display:flex;
+        display: flex;
         flex-direction: column-reverse;
 
     }
@@ -322,7 +404,8 @@ a img:hover{
         width: 100%;
         margin: auto;
         position: static;
-        opacity: 100%;;
+        opacity: 100%;
+        ;
 
     }
 
@@ -363,7 +446,7 @@ a img:hover{
 }
 
 footer {
-    background-color:#272729;
+    background-color: #272729;
     color: white;
     display: flex;
     flex-direction: column;
@@ -386,6 +469,6 @@ footer a:visited {
 
 footer p {
     padding: 0;
-    margin: 10px;;
+    margin: 10px;
+    ;
 }
-

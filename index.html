@@ -8,6 +8,8 @@
 </head>
 
 <body>
+
+
     <section id="container">
         <section id="popup">
             <p>No path exists</p>
@@ -18,26 +20,37 @@
             <!--cells will be drawn here-->
         </div>
     </section>
-    <section id="controlPanel">
-        <div id="algorithms">
-            <button id="astar" class="search">A* Search</button>
-            <button id="BFS" class="search">Breadth First Search</button>
-            <button id="DFS" class="search">Depth First Search</button>
-            <button id="RS" class="search">Random Search</button>
+    
+    <section class="controlPanel">
+        <div class="dropdown">
+            <button>Search Algorithms</button>
+            <div class="dropdown-content">
+                <a id="astar" class="search radiusTop">A* Search</a>
+                <a id="BFS" class="search">Breadth First Search</a>
+                <a id="DFS" class="search">Depth First Search</a>
+                <a id="RS" class="search radiusBottom">Random Search</a>
+            </div>
         </div>
-        <div id="settings">
+        <div class="dropdown">
+            <button>Create Maze</button>
+            <div class="dropdown-content">
+                <a id="createMaze" class="maze">Random</a>
+            </div>
+        </div>
+        <div class="slider">
+            <p>Speed</p>
             <input type="range" id="speed" name="speed" min="0.5" max="0.999" step="any" value="0.9">
-            <label for="volume">speed</label>
-            <button id="toggleWall">Delete Wall</button>
-            <button id="createMaze" disabled>Create Maze</button>
-            <button id="clear">Clear visitd</button>
-            <button id="clear">Clear Board</button>
+
         </div>
+
+        <button id="toggleWall" class="button1">Delete Wall</button>
+        <button id="clear" class="button1">Clear Paths</button>
+        <button id="clear" class="button1">Clear Board</button>
+        <section id="console">
+            
+        </section>
+    
     </section>
-    <aside id="console">
-
-    </aside>
-
 
 
     <section class="content">
@@ -61,11 +74,11 @@
                     </div>
                     <section class="links">
                         <a target="_blank" rel="noopener noreferrer"
-                            href="https://github.com/MarcBaeuerle/PathFinding/blob/main/algorithms/aStar.js" ><img class="blueFilter"
-                                src="assets/github_icon.png"></a>
+                            href="https://github.com/MarcBaeuerle/PathFinding/blob/main/algorithms/aStar.js"><img
+                                class="blueFilter" src="assets/github_icon.png"></a>
                         <a target="_blank" rel="noopener noreferrer"
-                            href="http://theory.stanford.edu/~amitp/GameProgramming/AStarComparison.html#the-a-star-algorithm"><img class="blueFilter"
-                                src="assets/newTab.png"></a>
+                            href="http://theory.stanford.edu/~amitp/GameProgramming/AStarComparison.html#the-a-star-algorithm"><img
+                                class="blueFilter" src="assets/newTab.png"></a>
                     </section>
                 </div>
             </li>
@@ -83,11 +96,11 @@
                     </div>
                     <section class="links">
                         <a target="_blank" rel="noopener noreferrer"
-                            href="https://github.com/MarcBaeuerle/PathFinding/blob/main/algorithms/BFS.js"><img class="blueFilter"
-                                src="assets/github_icon.png"></a>
+                            href="https://github.com/MarcBaeuerle/PathFinding/blob/main/algorithms/BFS.js"><img
+                                class="blueFilter" src="assets/github_icon.png"></a>
                         <a target="_blank" rel="noopener noreferrer"
-                            href="https://techbum.io/breadth-first-search-graph-traversal-patterns/"><img class="blueFilter";
-                                src="assets/newTab.png"></a>
+                            href="https://techbum.io/breadth-first-search-graph-traversal-patterns/"><img
+                                class="blueFilter" ; src="assets/newTab.png"></a>
                     </section>
                 </div>
             </li>
@@ -106,10 +119,10 @@
                     </div>
                     <section class="links">
                         <a target="_blank" rel="noopener noreferrer"
-                            href="https://github.com/MarcBaeuerle/PathFinding/blob/main/algorithms/DFS.js"><img class="blueFilter"
-                                src="assets/github_icon.png"></a>
-                        <a target="_blank" rel="noopener noreferrer" href="https://www.programiz.com/dsa/graph-dfs"><img class="blueFilter"
-                                src="assets/newTab.png"></a>
+                            href="https://github.com/MarcBaeuerle/PathFinding/blob/main/algorithms/DFS.js"><img
+                                class="blueFilter" src="assets/github_icon.png"></a>
+                        <a target="_blank" rel="noopener noreferrer" href="https://www.programiz.com/dsa/graph-dfs"><img
+                                class="blueFilter" src="assets/newTab.png"></a>
                     </section>
                 </div>
             </li>
@@ -128,8 +141,8 @@
                     </div>
                     <section class="links">
                         <a target="_blank" rel="noopener noreferrer"
-                            href="https://github.com/MarcBaeuerle/PathFinding/blob/main/algorithms/RS.js"><img class="blueFilter"
-                                src="assets/github_icon.png"></a>
+                            href="https://github.com/MarcBaeuerle/PathFinding/blob/main/algorithms/RS.js"><img
+                                class="blueFilter" src="assets/github_icon.png"></a>
                     </section>
                 </div>
             </li>
@@ -156,10 +169,6 @@
         import { createBoard } from "./board.js";
 
         createBoard();
-
-
-
-
 
     </script>
 </body>

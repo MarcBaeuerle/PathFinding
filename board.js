@@ -391,6 +391,7 @@ export function displayOpened(x, y) {
 export function makeWall(x, y) {
     let node = document.getElementById(`node${(y * rowSize) + (x + 1)}`);
     node.classList.add(`wall`);
+
 }
 
 
