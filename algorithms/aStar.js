@@ -89,7 +89,6 @@ export async function aStar(grid, diag) {
     }
     if (debugMsg) console.log("No path found");
     displayNoPath();
-    toggleButtons();
 }
 
 /**

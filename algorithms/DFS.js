@@ -65,7 +65,6 @@ export async function DFS(grid) {
     }
     if (debugMsg) console.log("No path found");
     displayNoPath();
-    toggleButtons();
 
 }
 

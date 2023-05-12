@@ -9,7 +9,6 @@
 
 <body>
 
-
     <section id="container">
         <section id="popup">
             <p>No path exists</p>
@@ -20,7 +19,7 @@
             <!--cells will be drawn here-->
         </div>
     </section>
-    
+
     <section class="controlPanel">
         <div class="dropdown">
             <button>Search Algorithms</button>
@@ -34,7 +33,8 @@
         <div class="dropdown">
             <button>Create Maze</button>
             <div class="dropdown-content">
-                <a id="createMaze" class="maze">Random</a>
+                <a id="createMaze" class="maze radiusTop">Sparse Random Maze</a>
+                <a class="maze radiusBottom">Dense Random Maze</a>
             </div>
         </div>
         <div class="slider">
@@ -45,11 +45,12 @@
 
         <button id="toggleWall" class="button1">Delete Wall</button>
         <button id="clear" class="button1">Clear Paths</button>
-        <button id="clear" class="button1">Clear Board</button>
-        <section id="console">
-            
-        </section>
-    
+        <button id="clearBoard" class="button1">Clear Board</button>
+
+    </section>
+    <div class="box1"></div>
+    <section id="console">
+
     </section>
 
 

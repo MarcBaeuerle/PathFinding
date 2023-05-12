@@ -1,4 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300;400&family=Source+Code+Pro:wght@500&family=Ubuntu:wght@300;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300;400&family=Source+Code+Pro:wght@500&family=Ubuntu:wght@300;400;500&display=swap');
+/*
+light blue: rgb(149, 195, 210)
+box border: rgb(63, 63, 63) 
+dark background: #272729;
+
+
+*/
+
 * {
     padding: 0;
     margin: 0;
@@ -121,28 +129,60 @@ body {
 
 /* -----------------Control Panel----------------- */
 
+.box1 {
+    height: 5px;
+    background-image: linear-gradient(rgb(149, 195, 210), #121212);
+}
+
 .controlPanel {
     margin: 0;
     padding: 0;
-    background-color: red;
     display: flex;
     justify-content:left;
     padding: 10px;
-    gap: 10px;
+    gap: 20px;
     flex-wrap: wrap;
-    width: fit-content;
+    background-color: rgb(149, 195, 210);
+    color: #121212;
+    font-family:'Ubuntu', sans-serif;
+    font-weight: 500;
+    font-size: 1.1rem;
 }
 
 button {
-    width: 150px;
+    width: 220px;
     height: 50px;
     border-radius: 10px;
     border: none;
+    font-family: inherit;
+    font-weight: 500;
+    background-color: rgb(149, 195, 210);
+    border: 2px solid #121212;
+    color: #121212;
+    transition: color 0.3s;
+    font-size: inherit; 
+}
+
+button:hover {
+    color: white;
+}
+
+.button1:active {
+    transform: translate(1px, 3px);
+    box-shadow: none;
 }
 
 .button1 {
-    width: 100px;
+    width: 130px;
+    box-shadow: 1px 3px #121212;
+    transition: transform 0s, color 0.3s, box-shadow 0s;
 }
+
+.button1:active {
+    transform: translate(1px, 3px);
+    box-shadow: none;
+}
+
 
 .dropdown {
     position: relative;
@@ -159,19 +199,21 @@ button {
 
 .dropdown-content a {
     transition: 0.2s ease;
-    background-color: white;
-    color: black;
-    padding: 10px 0 10px 10px;
+    background-color: rgb(149, 195, 210);
+    padding: 15px 10px;;
+    border-bottom: 1px solid #6f6f6f;
 }
 
 .dropdown-content a:hover {
-    background-color: lightblue;
+    background-color: rgb(151, 208, 226);
+    color: white;
 
 }
 
 .dropdown:hover .dropdown-content {
     display: flex;
     flex-direction: column;
+    transform: scale(1);
 }
 
 input[type="range"] {
@@ -187,15 +229,19 @@ input[type="range"] {
 .slider {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 8px;
     align-items: center;
     margin-top: 5px;
+    padding: 0 10px;
+    border-radius: 7px;
+
 }
 
 /***** Track Styles *****/
 /***** Chrome, Safari, Opera, and Edge Chromium *****/
 input[type="range"]::-webkit-slider-runnable-track {
-    background: #053a5f;
+    background: white;
+    border: 1px solid black;
     height: 6px;
     border-radius: 5px;
 }
@@ -210,8 +256,8 @@ input[type="range"]::-moz-range-track {
 input[type="range"]::-webkit-slider-thumb {
     -webkit-appearance: none; /* Override default look */
     appearance: none;
-    margin-top: -7px; /* Centers thumb on the track */
-    background-color: #5cd5eb;
+    margin-top: -8px; /* Centers thumb on the track */
+    background-color: #121212;
     height: 20px;
     width: 8px;    
     border-radius: 10px;
@@ -231,10 +277,12 @@ input[type="range"]::-webkit-slider-thumb {
 
 /*--------------Console--------------*/
 #console {
-    width: 100pxpx;
-    height: 50px;
-    background-color: blue;
-
+    height: 70px;
+    text-align: left;
+    overflow-y: auto;
+    padding: 0 10px;
+    border-bottom: 1px solid rgb(63, 63, 63);
+    padding-bottom: 10px;
 }
 
 #console p {
@@ -247,9 +295,11 @@ input[type="range"]::-webkit-slider-thumb {
 /*-–------Content-----------*/
 
 h1 {
-    margin: 30px 0;
+    margin: 30px;
     font-family: 'Ubuntu', sans-serif;
     color: white;
+    font-size: 2rem;
+    margin-bottom: 60px;
 }
 
 
@@ -264,7 +314,7 @@ li {
     position: relative;
     display: flex;
     align-items: center;
-    margin-bottom: 100px;
+    margin-bottom: 150px;
 }
 
 .leftLi {
@@ -274,7 +324,6 @@ li {
 .GIF {
     margin: 0;
     padding: 0;
-    background-color: pink;
     width: 55%;
     display: flex;
     align-items: center;
@@ -307,7 +356,7 @@ li {
     text-align: right;
     border-radius: 7px;
     border: 1px solid #3e3e42;
-    padding: 0 15px;
+    padding: 15px;
     position: relative;
     /* background-color: #121212; */
 }

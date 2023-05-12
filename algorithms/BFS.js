@@ -62,7 +62,6 @@ export async function BFS(grid) {
 
     if (debugMsg) console.log("No path found");
     displayNoPath();
-    toggleButtons();
 
 }
 

@@ -3,7 +3,7 @@ import { aStar } from "./algorithms/aStar.js";
 import { BFS } from "./algorithms/BFS.js";
 import { DFS } from "./algorithms/DFS.js";
 import { RS } from "./algorithms/RS.js";
-import { primMaze } from "./algorithms/mazeGeneration.js";
+import { randomMaze } from "./maze/randomMaze.js";
 
 let grid = document.querySelector(`#grid`);
 let toggleWall = document.querySelector(`#toggleWall`);
@@ -12,6 +12,8 @@ let slider = document.getElementById('speed');
 let stats = document.getElementById('console');
 let clear = document.getElementById('clear');
 let search = document.getElementsByClassName('search');
+let clearBoard = document.getElementById(`clearBoard`);
+let preload = document.getElementById(`preload`);
 
 const WALL_COLOR = `rgb(255, 255, 255)`;
 const START_COLOR = `rgb(0, 128, 0)`;
@@ -37,7 +39,7 @@ export var speed = 0.1;
 for (let i = 0; i < search.length; i++) {
     search[i].addEventListener('click', () => {
         computeArr(search[i].id);
-        toggleButtons();
+        
     });
 }
 
@@ -103,7 +105,6 @@ export function createBoard() {
 
         grid.appendChild(row);
     }
-
     document.onmouseup = disableToggle;
     row = document.querySelector(`#row1`);
 }
@@ -265,17 +266,20 @@ export function createPath(path) {
         clearGrid();
     }
 
+
+
     async function load() {
         for (let i = path.length - 1; i > 0; i--) {
             let x = path[i].x;
             let y = path[i].y;
             let node = document.getElementById(`node${(y * rSize) + (x + 1)}`)
 
+
             await timer(1500 / path.length);
-            
             node.classList.remove(`visited`);
             node.classList.add(`path`);
         }
+
     }
     load();
     pathExists = true;
@@ -286,12 +290,17 @@ export function createPath(path) {
 /**
  * Clears existing path on the grid
  */
-export function clearGrid() {
+export function clearGrid(int) {
     let rSize = row.childElementCount;
     for (let i = 0; i < grid.childElementCount; i++) {
         for (let j = 0; j < rSize; j++) {
-            document.getElementById(`node${(i * rSize) + (j + 1)}`).classList.remove(`path`, `visited`, `opened`);
-            document.getElementById(`node${(i * rSize) + (j + 1)}`).innerHTML = ``;
+            let node = document.getElementById(`node${(i * rSize) + (j + 1)}`);
+            node.classList.remove(`path`, `visited`, `opened`);
+            node.innerHTML = ``;
+
+            if (int === 1) {
+                node.classList.remove(`wall`);
+            }
         }
     }
     pathExists = false;
@@ -400,7 +409,6 @@ export function makeWall(x, y) {
  * NOT IMPLEMENTED
  */
 maze.addEventListener('click', () => {
-
     let matrix = new Array(rowCount);
     let count = 1;
 
@@ -423,7 +431,7 @@ maze.addEventListener('click', () => {
 
     var grid = new Grid(matrix, 0);
 
-    primMaze(grid);
+    randomMaze(grid);
 })
 
 
@@ -431,7 +439,7 @@ maze.addEventListener('click', () => {
  * Changes the speed of grid animation when moving the slider
  */
 slider.addEventListener('input', () => {
-    speed = 0.934 - Math.pow((slider.value-0.5), 1/10);
+    speed = 0.934 - Math.pow((slider.value - 0.5), 1 / 10);
 }, false);
 
 
@@ -468,15 +476,19 @@ export function timeDiff(startTime) {
  */
 export function toggleButtons() {
     disableSearch = !disableSearch;
-    for (let i = 0; i < search.length; i++) {
-        if (disableSearch) {
-            search[i].disabled = true;
-        } else {
-            search[i].disabled = false;
-        }
-    }
+    // for (let i = 0; i < search.length; i++) {
+    //     if (disableSearch) {
+    //         search[i].style.pointerEvents = `auto`;
+    //     } else {
+    //         search[i].style.pointerEvents = `none`;
+    //     }
+    // }
 }
 
 clear.addEventListener('click', () => {
     clearGrid();
+})
+
+clearBoard.addEventListener('click', () => {
+    clearGrid(1);
 })
