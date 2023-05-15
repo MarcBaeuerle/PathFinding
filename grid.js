@@ -92,15 +92,16 @@ export class Grid {
                 neighbours.push(grid[y - 1][x]);
             }
 
+            //East node
+            if (grid[y][x + 1]) {
+                neighbours.push(grid[y][x + 1]);
+            }
+
             //South node
             if (grid[y + 1] && grid[y + 1][x]) {
                 neighbours.push(grid[y + 1][x]);
             }
 
-            //East node
-            if (grid[y][x + 1]) {
-                neighbours.push(grid[y][x + 1]);
-            }
             //West node
             if (grid[y][x - 1]) {
                 neighbours.push(grid[y][x - 1]);

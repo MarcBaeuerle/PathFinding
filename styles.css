@@ -1,8 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300;400&family=Source+Code+Pro:wght@500&family=Ubuntu:wght@300;400;500&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300;400&family=Roboto+Mono&family=Source+Code+Pro:wght@500&family=Ubuntu:wght@300;400;500&display=swap');
+
 /*
 light blue: rgb(149, 195, 210)
 box border: rgb(63, 63, 63) 
 dark background: #272729;
+yellow: rgb(255, 249, 81)
 
 
 */
@@ -85,11 +89,16 @@ body {
 }
 
 .visited {
-    background-color: #396bcf;
+    /* background-color: #396bcf; */
+    background-color: #4d90cb;
+
 }
 
 .opened {
-    background-color: rgb(66, 158, 66);
+    /* background-color: rgb(66, 158, 66); */
+    /* background-color: rgb(86, 166, 122); */
+    background-color: rgb(86, 163, 86);
+
 }
 
 .node p {
@@ -131,20 +140,20 @@ body {
 
 .box1 {
     height: 5px;
-    background-image: linear-gradient(rgb(149, 195, 210), #121212);
+    /* background-image: linear-gradient(rgb(149, 195, 210), #121212); */
 }
 
 .controlPanel {
     margin: 0;
     padding: 0;
     display: flex;
-    justify-content:left;
+    justify-content: left;
     padding: 10px;
     gap: 20px;
     flex-wrap: wrap;
-    background-color: rgb(149, 195, 210);
+    /* background-color: rgb(149, 195, 210); */
     color: #121212;
-    font-family:'Ubuntu', sans-serif;
+    font-family: 'Ubuntu', sans-serif;
     font-weight: 500;
     font-size: 1.1rem;
 }
@@ -156,15 +165,22 @@ button {
     border: none;
     font-family: inherit;
     font-weight: 500;
-    background-color: rgb(149, 195, 210);
-    border: 2px solid #121212;
-    color: #121212;
+    /* background-color: rgb(149, 195, 210); */
+    background-color: #121212;
+    /* border: 2px solid #121212; */
+    /* border: 3px solid rgb(149, 195, 210); */
+    border: 3px solid rgba(236, 209, 128, 0.803);
+    /* color: #121212; */
+    /* color: rgb(149, 195, 210); */
+    color: rgb(109, 205, 237);
+
     transition: color 0.3s;
-    font-size: inherit; 
+    font-size: inherit;
 }
 
 button:hover {
     color: white;
+    /* color: rgb(255, 249, 81); */
 }
 
 .button1:active {
@@ -190,6 +206,7 @@ button:hover {
 
 .dropdown-content {
     display: none;
+
     text-align: left;
     position: absolute;
     bottom: 100%;
@@ -199,8 +216,13 @@ button:hover {
 
 .dropdown-content a {
     transition: 0.2s ease;
-    background-color: rgb(149, 195, 210);
-    padding: 15px 10px;;
+    background-color: rgba(149, 195, 210, 0.918);
+    /* background-color: rgba(164, 202, 252, 0.776); */
+    color: rgb(16, 116, 153);
+
+
+    padding: 15px 10px;
+    ;
     border-bottom: 1px solid #6f6f6f;
 }
 
@@ -234,13 +256,15 @@ input[type="range"] {
     margin-top: 5px;
     padding: 0 10px;
     border-radius: 7px;
+    color: rgb(149, 195, 210);
 
 }
 
 /***** Track Styles *****/
 /***** Chrome, Safari, Opera, and Edge Chromium *****/
 input[type="range"]::-webkit-slider-runnable-track {
-    background: white;
+    /* background: white; */
+    background: rgb(254, 241, 120);
     border: 1px solid black;
     height: 6px;
     border-radius: 5px;
@@ -248,31 +272,35 @@ input[type="range"]::-webkit-slider-runnable-track {
 
 /******** Firefox ********/
 input[type="range"]::-moz-range-track {
-    background: #053a5f;
+    /* background: #053a5f; */
     height: 0.5rem;
 }
+
 /***** Thumb Styles *****/
 /***** Chrome, Safari, Opera, and Edge Chromium *****/
 input[type="range"]::-webkit-slider-thumb {
-    -webkit-appearance: none; /* Override default look */
+    -webkit-appearance: none;
+    /* Override default look */
     appearance: none;
-    margin-top: -8px; /* Centers thumb on the track */
-    background-color: #121212;
+    margin-top: -8px;
+    /* Centers thumb on the track */
+    /* background-color: #121212; */
+    background-color: rgb(226, 63, 63);
     height: 20px;
-    width: 8px;    
+    width: 8px;
     border-radius: 10px;
- }
+}
 
- .radiusBottom {
+.radiusBottom {
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
- }
+}
 
- .radiusTop {
+.radiusTop {
     border-top-right-radius: 5px;
     border-top-left-radius: 5px;
 
- }
+}
 
 
 /*--------------Console--------------*/

@@ -7,7 +7,7 @@ import { randomMaze } from "./maze/randomMaze.js";
 
 let grid = document.querySelector(`#grid`);
 let toggleWall = document.querySelector(`#toggleWall`);
-let maze = document.getElementById('createMaze');
+let randMaze = document.getElementsByClassName('randMaze');
 let slider = document.getElementById('speed');
 let stats = document.getElementById('console');
 let clear = document.getElementById('clear');
@@ -40,6 +40,15 @@ for (let i = 0; i < search.length; i++) {
     search[i].addEventListener('click', () => {
         computeArr(search[i].id);
         
+    });
+}
+
+/**
+ * Event Listener for each maze generation
+ */
+for (let i = 0; i < randMaze.length; i++) {
+    randMaze[i].addEventListener('click', () => {
+        randomMaze(rowSize, rowCount, randMaze[i].id); 
     });
 }
 
@@ -400,40 +409,7 @@ export function displayOpened(x, y) {
 export function makeWall(x, y) {
     let node = document.getElementById(`node${(y * rowSize) + (x + 1)}`);
     node.classList.add(`wall`);
-
 }
-
-
-/**
- * Generates a maze on button click.
- * NOT IMPLEMENTED
- */
-maze.addEventListener('click', () => {
-    let matrix = new Array(rowCount);
-    let count = 1;
-
-    for (let i = 0; i < rowCount; i++) {
-        matrix[i] = new Array(rowSize);
-
-        for (let j = 0; j < rowSize; j++) {
-            let node = document.getElementById(`node${count}`);
-            let cList = node.classList;
-            let val = 1;
-            if (cList.contains(`start`)) {
-                val = 2;
-            } else if (cList.contains(`end`)) {
-                val = 3;
-            }
-            matrix[i][j] = val;
-            count++;
-        }
-    }
-
-    var grid = new Grid(matrix, 0);
-
-    randomMaze(grid);
-})
-
 
 /**
  * Changes the speed of grid animation when moving the slider
