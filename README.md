@@ -8,7 +8,7 @@ The start node is green, end node is red and the walls are white
 To move start or end node:
 - click on the respective node to remove it from the grid and simply press anythere else. Rinse and repeat.
 
-## Diagonal Movement
+## (TODO) Diagonal Movement
 Both diagonal and non-diagonal movement is supported, simply check the 'diagonal' box at the left side of the control panel.
 
 ## Variable speed
@@ -28,6 +28,6 @@ You may change the speed of the bisualization during runtime.
 - Random Maze
   - Sparse --> 15% chance any given node becomes a wall
   - Dense  --> 33% chance any given node becomes a wall
-- Recursive division
-- Prim's algorithm
-- Kruskalls Algorithm
+- (TODO) Recursive division
+- (TODO) Prim's algorithm
+- (TODO) Kruskalls Algorithm
