@@ -15,6 +15,7 @@ const stats = document.getElementById('console');
 const clear = document.getElementById('clear');
 const search = document.getElementsByClassName('search');
 const clearBoard = document.getElementById(`clearBoard`);
+const preload = document.getElementById(`preload`);
 
 const timer = ms => new Promise(res => setTimeout(res, ms))
 
@@ -29,6 +30,7 @@ var rowSize;
 var initialWidth;
 var count = 1;
 var disableSearch = false;
+var preloadHeight = 80;
 export var speed = 0.1;
 
 /**
@@ -96,9 +98,12 @@ export function createBoard() {
         }
 
         grid.appendChild(row);
+        preloadHeight -= 4;
+        preload.style.height = `${preloadHeight}vh`
     }
     document.onmouseup = disableToggle;
     row = document.querySelector(`#row1`);
+    preload.style.display = `none`;
 }
 
 

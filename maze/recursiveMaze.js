@@ -1,9 +1,6 @@
 import { sleep } from "../grid.js";
 import { clearGrid, makeWall, speed } from "../board.js";
 
-
-
-
 //  DOES
 //  NOT
 //  WORK

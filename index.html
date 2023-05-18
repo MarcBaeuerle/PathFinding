@@ -19,10 +19,19 @@
     <title>Pathfinding Visualization</title>
     <link rel="stylesheet" href="styles.css" media="screen" type="text/css">
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-DLF29835G3"></script>
+    <script type="module">
+        import { createBoard } from "./board.js";
+
+        createBoard();
+
+    </script>
 
 </head>
 
 <body>
+
+    <section id ="preload">
+    </section>
 
     <section id="container">
         <section id="popup">
@@ -56,7 +65,7 @@
             </div>
         </div>
         <div class="slider">
-            <p>Speed</p>
+            <label for="speed"><p>Speed</p></label>
             <input type="range" id="speed" name="speed" min="0" max="0.999" step="any" value="0.9">
 
         </div>
@@ -80,7 +89,9 @@
         <ul>
             <li>
                 <div class="GIF">
-                    <img src="a*animation.gif">
+                    <video muted autoplay loop>
+                        <source src="assets/astar.webm" alt="A* Pathfinding animation" loading="lazy">
+                    </video>
                 </div>
                 <div class="container">
                     <h2>A* Search</h2>
@@ -96,16 +107,18 @@
                     <section class="links">
                         <a target="_blank" rel="noopener noreferrer"
                             href="https://github.com/MarcBaeuerle/PathFinding/blob/main/algorithms/aStar.js"><img
-                                class="blueFilter" src="assets/github_icon.png"></a>
+                                class="blueFilter" src="assets/github_icon.png" width="30" height="30" alt="github logo"></a>
                         <a target="_blank" rel="noopener noreferrer"
                             href="http://theory.stanford.edu/~amitp/GameProgramming/AStarComparison.html#the-a-star-algorithm"><img
-                                class="blueFilter" src="assets/newTab.png"></a>
+                                class="blueFilter" src="assets/newTab.png" width="30" height="30" alt="other resources icon"></a>
                     </section>
                 </div>
             </li>
             <li class="leftLi">
                 <div class="GIF">
-                    <img src="a*animation.gif">
+                    <video muted autoplay loop>
+                        <source src="assets/bfs.webm" alt="BFS Pathfinding animation" loading="lazy">
+                    </video>
                 </div>
                 <div class="container">
                     <h2>Breadth First Search</h2>
@@ -118,16 +131,18 @@
                     <section class="links">
                         <a target="_blank" rel="noopener noreferrer"
                             href="https://github.com/MarcBaeuerle/PathFinding/blob/main/algorithms/BFS.js"><img
-                                class="blueFilter" src="assets/github_icon.png"></a>
+                                class="blueFilter" src="assets/github_icon.png" width="30" height="30" alt="github logo"></a>
                         <a target="_blank" rel="noopener noreferrer"
                             href="https://techbum.io/breadth-first-search-graph-traversal-patterns/"><img
-                                class="blueFilter" ; src="assets/newTab.png"></a>
+                                class="blueFilter" ; src="assets/newTab.png" width="30" height="30" alt="other resources icon"></a>
                     </section>
                 </div>
             </li>
             <li>
                 <div class="GIF">
-                    <img src="a*animation.gif">
+                    <video muted autoplay loop>
+                        <source src="assets/dfs.webm" alt="DFS Pathfinding animation" loading="lazy">
+                    </video>
                 </div>
                 <div class="container">
                     <h2>Depth First Search</h2>
@@ -141,15 +156,17 @@
                     <section class="links">
                         <a target="_blank" rel="noopener noreferrer"
                             href="https://github.com/MarcBaeuerle/PathFinding/blob/main/algorithms/DFS.js"><img
-                                class="blueFilter" src="assets/github_icon.png"></a>
+                                class="blueFilter" src="assets/github_icon.png" width="30" height="30" alt="github logo"></a>
                         <a target="_blank" rel="noopener noreferrer" href="https://www.programiz.com/dsa/graph-dfs"><img
-                                class="blueFilter" src="assets/newTab.png"></a>
+                                class="blueFilter" src="assets/newTab.png" width="30" height="30" alt="other resources icon"></a>
                     </section>
                 </div>
             </li>
             <li class="leftLi">
                 <div class="GIF">
-                    <img src="a*animation.gif">
+                    <video muted autoplay loop>
+                        <source src="assets/RS.webm" alt="RS Pathfinding animation" loading="lazy">
+                    </video>
                 </div>
                 <div class="container">
                     <h2>Random Search</h2>
@@ -163,7 +180,7 @@
                     <section class="links">
                         <a target="_blank" rel="noopener noreferrer"
                             href="https://github.com/MarcBaeuerle/PathFinding/blob/main/algorithms/RS.js"><img
-                                class="blueFilter" src="assets/github_icon.png"></a>
+                                class="blueFilter" src="assets/github_icon.png" width="30" height="30" alt="github logo"></a>
                     </section>
                 </div>
             </li>
@@ -171,8 +188,6 @@
 
         </ul>
     </section>
-
-
 
     <footer>
         <p>Built and designed by Marc Baeuerle</p>
@@ -185,13 +200,6 @@
 
     </footer>
 
-
-    <script type="module">
-        import { createBoard } from "./board.js";
-
-        createBoard();
-
-    </script>
 </body>
 
 </html>
