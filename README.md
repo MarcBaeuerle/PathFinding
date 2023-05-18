@@ -1,4 +1,4 @@
-# Pathfinding and Maze Generation Visualization
+# [Pathfinding and Maze Generation Visualization](https://marcbaeuerle.github.io/Pathfinding-visualization/)
 This is my first attempt at visualizing the beauty of pathfinding algorithms. You can modify all major features of the algorithm through the 'control panel'. While testing the search algorithms, drawing new walls and creating new mazes got tiresome, so I decided to also add some basic random maze generation. Later on I will add some more interesting maze generation algorithms like Prim's and Kruskall's algorithms. Here I will go through the major features of this program. 
 
 ## Demo
