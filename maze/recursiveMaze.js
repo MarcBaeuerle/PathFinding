@@ -1,6 +1,12 @@
 import { sleep } from "../grid.js";
 import { clearGrid, makeWall, speed } from "../board.js";
 
+
+
+
+//  DOES
+//  NOT
+//  WORK
 export async function recursiveMaze(grid, x, y, width, height, hx, hy) {
 
     if (width < 2 || height < 2) return;
