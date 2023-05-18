@@ -30,7 +30,6 @@ By default, right clicking on the grid creates walls. To remove walls, press the
 - "Random Search"
   - A basic spinoff of DFS, where neighbours of a given node are added to the stack in random order.
 
-
 ## Maze Generation Algorithms
 - Random Maze
   - Sparse --> 15% chance any given node becomes a wall
