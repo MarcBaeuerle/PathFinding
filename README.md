@@ -1,6 +1,10 @@
 # Pathfinding and Maze Generation Visualization
 This is my first attempt at visualizing the beauty of pathfinding algorithms. You can modify all major features of the algorithm through the 'control panel'. While testing the search algorithms, drawing new walls and creating new mazes got tiresome, so I decided to also add some basic random maze generation. Later on I will add some more interesting maze generation algorithms like Prim's and Kruskall's algorithms. Here I will go through the major features of this program.  
 
+
+https://github.com/MarcBaeuerle/PathFinding/assets/92479171/3ac4e5cc-4803-47db-8e07-ea466587d57b
+
+
 ## Basic Controls
 The map is automatically created to fit the size of the browser window, so if you would like the change the size of the grid, simply enlarge/reduce the size of the window, or zoom in/out(grid breaks at 25% zoom).
 The start node is green, end node is red and the walls are white
