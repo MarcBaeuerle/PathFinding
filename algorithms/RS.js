@@ -36,7 +36,7 @@ export async function RS(grid) {
         if (curr == end) {
             if (debugMsg) console.log("Path has been found");
             let time = timeDiff(startTime);
-            printPath(curr, 'RS', calls, time);
+            printPath(curr, 'RS&nbsp', calls, time);
             return;
         }
 

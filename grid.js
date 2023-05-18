@@ -124,7 +124,10 @@ export class Grid {
         let d1 = Math.abs(this.end.x - node.x);
         let d2 = Math.abs(this.end.y - node.y);
         return d1 + d2;
+
     }
+
+    
 
 }
 

@@ -34,21 +34,23 @@
             <button>Create Maze</button>
             <div class="dropdown-content">
                 <a id="sparseRandMaze" class="maze randMaze radiusTop">Sparse Random Maze</a>
-                <a id="denseRandMaze" class="maze randMaze">Dense Random Maze</a>
-                <a id="recursiveMaze" class="maze ">Recursive Division Maze</a>
+                <a id="denseRandMaze" class="maze randMaze radiusBottom">Dense Random Maze</a>
+                <!-- <a id="recursiveMaze" class="maze ">Recursive Division Maze</a>
                 <a id="primsAlgorithm" class="maze ">Prim's algorithm</a>
-                <a id="kruskallsAlgorithm" class="maze radiusBottom">Kruskall's Algorithm</a>
+                <a id="kruskallsAlgorithm" class="maze radiusBottom">Kruskall's Algorithm</a> -->
             </div>
         </div>
         <div class="slider">
             <p>Speed</p>
-            <input type="range" id="speed" name="speed" min="0.5" max="0.999" step="any" value="0.9">
+            <input type="range" id="speed" name="speed" min="0" max="0.999" step="any" value="0.9">
 
         </div>
 
         <button id="toggleWall" class="button1">Delete Wall</button>
         <button id="clear" class="button1">Clear Paths</button>
         <button id="clearBoard" class="button1">Clear Board</button>
+        <div class="diagonal">
+        </div>
 
     </section>
     <div class="box1"></div>

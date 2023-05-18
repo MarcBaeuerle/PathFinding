@@ -4,20 +4,18 @@ import { BFS } from "./algorithms/BFS.js";
 import { DFS } from "./algorithms/DFS.js";
 import { RS } from "./algorithms/RS.js";
 import { randomMaze } from "./maze/randomMaze.js";
+import { recursiveMaze } from "./maze/recursiveMaze.js";
 
-let grid = document.querySelector(`#grid`);
-let toggleWall = document.querySelector(`#toggleWall`);
-let randMaze = document.getElementsByClassName('randMaze');
-let slider = document.getElementById('speed');
-let stats = document.getElementById('console');
-let clear = document.getElementById('clear');
-let search = document.getElementsByClassName('search');
-let clearBoard = document.getElementById(`clearBoard`);
-let preload = document.getElementById(`preload`);
+const grid = document.querySelector(`#grid`);
+const toggleWall = document.querySelector(`#toggleWall`);
+const randMaze = document.getElementsByClassName('randMaze');
+const recurMaze = document.getElementById(`recursiveMaze`);
+const slider = document.getElementById('speed');
+const stats = document.getElementById('console');
+const clear = document.getElementById('clear');
+const search = document.getElementsByClassName('search');
+const clearBoard = document.getElementById(`clearBoard`);
 
-const WALL_COLOR = `rgb(255, 255, 255)`;
-const START_COLOR = `rgb(0, 128, 0)`;
-const END_COLOR = `rgb(255, 0, 0)`;
 const timer = ms => new Promise(res => setTimeout(res, ms))
 
 var startNode = false;
@@ -39,47 +37,38 @@ export var speed = 0.1;
 for (let i = 0; i < search.length; i++) {
     search[i].addEventListener('click', () => {
         computeArr(search[i].id);
-        
     });
 }
 
 /**
- * Event Listener for each maze generation
+ * Event Listener for each random maze generation
  */
 for (let i = 0; i < randMaze.length; i++) {
     randMaze[i].addEventListener('click', () => {
-        randomMaze(rowSize, rowCount, randMaze[i].id); 
+        randomMaze(rowSize, rowCount, randMaze[i].id);
     });
 }
 
 
-
-
-
 /**
- * Creates and appends cells to page.
- * @param {int} x number of rows of grid
- * @param {int} y number of columns of grid.
- * @output cells to page
- * 
- * TODO: make the grid generation dynamic, but lets make sure a 10x10 works 
- * properly first.
+ * Creates and appends nodes to page.
+ * Called when page loads and no where else.
  */
 export function createBoard() {
-    let deviceWidth = window.innerWidth;
+    let deviceWidth = window.innerWidth;    
     let deviceHeight = window.innerHeight;
 
 
-    let y = Math.round((deviceWidth - 20) / 20);
+    let y = Math.round((deviceWidth - 20) / 20);    
     let x = Math.round(0.75 * (deviceHeight / 20));
 
-    rowCount = x;
+    rowCount = x;  
     rowSize = y;
 
     initialWidth = deviceWidth;
     grid.style.minWidth = y;
 
-    grid.onmousedown = enableToggle;
+    grid.onmousedown = enableToggle;    
 
     for (let i = 0; i < x; i++) {
         let row = document.createElement('div');
@@ -101,13 +90,7 @@ export function createBoard() {
                 endNode = true;
             }
 
-            // if (i === 2 && j === 2) {
-            //     node.classList.add(`end`);
-            //     endNode = true;
-            // }
-
-
-            node.onmouseenter = toggle; //drag clicking works
+            node.onmouseenter = toggle
 
             row.appendChild(node);
         }
@@ -215,10 +198,16 @@ function toggle(e) {
 
 
 /**
- * Converts the grid on the page into an array to be used for the 
- * designated path finding algorithm
+ * Converts the grid on the page into an array that can be used for the pathfinding
+ * algorithms. 
+ * 0 = empty
+ * 1 = wall
+ * 2 = start node
+ * 3 = end node
+ * 
+ * @param {string} algorithm The algorithm to called on the array.  
  */
-export function computeArr(string) {
+export function computeArr(algorithm) {
     let size = grid.childElementCount;
     let size2 = row.childElementCount;
     let matrix = new Array(size);
@@ -248,13 +237,13 @@ export function computeArr(string) {
 
     var test = new Grid(matrix, 1);
 
-    if (string === 'astar') {
+    if (algorithm === 'astar') {
         aStar(test, 0);
-    } else if (string === 'BFS') {
+    } else if (algorithm === 'BFS') {
         BFS(test);
-    } else if (string === 'DFS') {
+    } else if (algorithm === 'DFS') {
         DFS(test);
-    } else if (string == 'RS') {
+    } else if (algorithm == 'RS') {
         RS(test);
     }
 
@@ -265,7 +254,7 @@ export function computeArr(string) {
 
 /**
  * Creates a path from the end node to the start node
- * @param {array} path array from end node to start node
+ * @param {array} path array from start node to end node.
  */
 export function createPath(path) {
 
@@ -274,8 +263,6 @@ export function createPath(path) {
     if (pathExists) {
         clearGrid();
     }
-
-
 
     async function load() {
         for (let i = path.length - 1; i > 0; i--) {
@@ -299,7 +286,14 @@ export function createPath(path) {
 /**
  * Clears existing path on the grid
  */
-export function clearGrid(int) {
+
+
+/**
+ * Removes path, visited, opened properties of every node on the grid.
+ * If specified, also removes the walls.
+ * @param {int} removeWall 1 = remove walls too
+ */
+export function clearGrid(removeWall) {
     let rSize = row.childElementCount;
     for (let i = 0; i < grid.childElementCount; i++) {
         for (let j = 0; j < rSize; j++) {
@@ -307,7 +301,7 @@ export function clearGrid(int) {
             node.classList.remove(`path`, `visited`, `opened`);
             node.innerHTML = ``;
 
-            if (int === 1) {
+            if (removeWall === 1) {
                 node.classList.remove(`wall`);
             }
         }
@@ -322,9 +316,9 @@ export function clearGrid(int) {
 toggleWall.addEventListener('click', () => {
     deleteWalls = !deleteWalls;
     if (deleteWalls) {
-        toggleWall.innerText = 'Add walls';
+        toggleWall.innerText = 'Add wall';
     } else {
-        toggleWall.innerText = `Delete Walls`;
+        toggleWall.innerText = `Delete Wall`;
     }
 })
 
@@ -349,8 +343,8 @@ export function displayNoPath() {
 
 
 /**
- * makes the grid center when screen enlarged, and inline-block
- * when screen shrinks
+ * Makes the grid container flex when window is enlarged, and 
+ * become inline-block when screen schrinks from original size
  */
 window.addEventListener(`resize`, () => {
     let container = document.getElementById("container");
@@ -369,9 +363,6 @@ window.addEventListener(`resize`, () => {
 export function explore(x, y) {
     let node = document.getElementById(`node${(y * rowSize) + (x + 1)}`);
     node.classList.remove(`opened`, `path`);
-    // if (node.classList.contains('path')) {
-    //     return;
-    // }
 
     node.classList.add(`visited`);
 }
@@ -415,7 +406,7 @@ export function makeWall(x, y) {
  * Changes the speed of grid animation when moving the slider
  */
 slider.addEventListener('input', () => {
-    speed = 0.934 - Math.pow((slider.value - 0.5), 1 / 10);
+    speed = 1 - slider.value;
 }, false);
 
 
@@ -461,10 +452,17 @@ export function toggleButtons() {
     // }
 }
 
+
+/**
+ * Clears the grid (not including walls)
+ */
 clear.addEventListener('click', () => {
     clearGrid();
 })
 
+/**
+ * Clears the grid including walls
+ */
 clearBoard.addEventListener('click', () => {
     clearGrid(1);
 })

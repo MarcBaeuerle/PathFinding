@@ -48,7 +48,8 @@ export async function aStar(grid, diag) {
             return;
         }
 
-        let neighbours = grid.getNeighbours(curr, allowDiag);
+        let neighbours = grid.getNeighbours(curr, 0);
+        
 
         for (let i = 0; i < neighbours.length; i++) {
             let neighbour = neighbours[i];
